@@ -106,21 +106,33 @@ function is_post_request() {
     return SERVER_REQUEST_METHOD == 'POST';
 }
 
+/**
+ * Determines if the request was an ajax request
+ * @return Boolean
+ */
 function is_ajax_request() {
     return !empty(HTTP_XRW) &&
-      strtolower(HTTP_XRW) == 'xmlhttprequest';
-  }
+            strtolower(HTTP_XRW) == 'xmlhttprequest';
+}
 
+/**
+ * Processes a string by removing blank spaces and replacing them with underscores
+ * @param string $string
+ * @return string
+ */
 function optionize($string) {
     return str_replace(' ', '_', strtolower($string));
 }
 
 /**
- * Accepts unit from foreach loop, opt is from optionize function, from_to_unit is from_unit or to_unit
- * @param type $unit
- * @param type $opt
- * @param type $from_to_unit
- * @return type
+ * Creates and populates Select list <code><option></option></code> tags
+ * 
+ * Accepts $unit from foreach loop, $opt is the return value from the 
+ * optionize function, from_to_unit is from_unit or to_unit
+ * @param string $unit
+ * @param string $opt
+ * @param string $from_to_unit
+ * @return string
  */
 function optionizer($unit, $opt, $from_to_unit) {
     $list = "<option value=\"{$opt}\"";
@@ -131,9 +143,16 @@ function optionizer($unit, $opt, $from_to_unit) {
     return $list;
 }
 
-// The function float_to_string formats a float into a string 
-// while also avoiding default use of scientific notation.
-// Rounds to $precision and trims extra trailing zeros.
+/**
+ * Formats a float to a string while avoiding default use of scientific notation
+ * 
+ * Rounds to $precision and trims extra trailing zeros
+ * 
+ * @internal : Utility
+ * @param type $float
+ * @param type $precision
+ * @return type
+ */
 function float_to_string($float, $precision = 10) {
     // Typecast to ensure value is a float
     $float = (float) $float;
@@ -322,6 +341,7 @@ function convert_from_liters(float $value, string $to_unit) {
 /**
  * Processes the volume conversions
  * 
+ * @internal : Volume
  * @param string $value
  * @param string $from_unit
  * @param string $to_unit
@@ -333,7 +353,15 @@ function convert_volume(string $value, string $from_unit, string $to_unit) {
     return $new_value;
 }
 
-// Mass
+/**
+ * Converts weight or mass measurements to kilograms
+ * 
+ * @internal : Mass
+ * @param float $value
+ * @param string $from_unit
+ * @return type
+ * @throws TypeError
+ */
 function convert_to_kilograms(float $value, string $from_unit) {
     switch (is_numeric($value)) :
         case true:
@@ -348,6 +376,14 @@ function convert_to_kilograms(float $value, string $from_unit) {
     endswitch;
 }
 
+/**
+ * Converts other weight or mass measurements from KG to other formats
+ * @internal : Mass
+ * @param float $value
+ * @param string $to_unit
+ * @return type
+ * @throws TypeError
+ */
 function convert_from_kilograms(float $value, string $to_unit) {
     switch (is_numeric($value)) :
         case true:
@@ -362,13 +398,30 @@ function convert_from_kilograms(float $value, string $to_unit) {
     endswitch;
 }
 
+/**
+ *  Processes the mass conversions
+ * 
+ * @internal : Mass
+ * @param string $value
+ * @param string $from_unit
+ * @param string $to_unit
+ * @return type
+ */
 function convert_mass(string $value, string $from_unit, string $to_unit) {
     $kg_value = convert_to_kilograms($value, $from_unit);
     $new_value = convert_from_kilograms($kg_value, $to_unit);
     return $new_value;
 }
 
-// Speed
+/**
+ * Converts speed measurements from one unit to the others
+ * 
+ * @internal : Speed
+ * @param type $value
+ * @param string $from_unit
+ * @param string $to_unit
+ * @return int
+ */
 function convert_speed($value, string $from_unit, string $to_unit) {
     if ($from_unit == 'knots') {
         $from_unit = 'nautical_miles_per_hour';
@@ -391,7 +444,14 @@ function convert_speed($value, string $from_unit, string $to_unit) {
     return $value;
 }
 
-// Temperature
+/**
+ * Converts other measurements to celsius / centigrade
+ * 
+ * @internal : Temperature
+ * @param float $value
+ * @param string $from_unit
+ * @return float
+ */
 function convert_to_celsius(float $value, string $from_unit) {
     switch ($from_unit) {
         case 'celsius':
@@ -405,6 +465,14 @@ function convert_to_celsius(float $value, string $from_unit) {
     }
 }
 
+/**
+ * Converts celsius / centigrade to other formats
+ * 
+ * @internal : Temperature
+ * @param float $value
+ * @param string $to_unit
+ * @return float
+ */
 function convert_from_celsius(float $value, string $to_unit) {
     switch ($to_unit) {
         case 'celsius':
@@ -418,6 +486,15 @@ function convert_from_celsius(float $value, string $to_unit) {
     }
 }
 
+/**
+ * Processes the temperature conversions
+ * 
+ * @internal : Temperature
+ * @param string $value
+ * @param string $from_unit
+ * @param string $to_unit
+ * @return type
+ */
 function convert_temperature(string $value, string $from_unit, string $to_unit) {
     $celsius_value = convert_to_celsius($value, $from_unit);
     $new_value = convert_from_celsius($celsius_value, $to_unit);
