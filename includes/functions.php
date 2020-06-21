@@ -20,7 +20,7 @@ define('SERVER_REQUEST_METHOD', $server_request_method);
  */
 $server_http_xrw = filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH', 513); # XMLHttpRequest
 /**
- * Constat that uses $server_http_xrw's value
+ * Constant that uses $server_http_xrw's value
  * 
  * Possible values include XMLHttpRequest
  */
