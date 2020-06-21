@@ -1,7 +1,7 @@
 # measurement conversion
 Converts distance, volume, mass, speed, and temperatures from one format to several others
 
-![Image of Project](https://github.com/pschudar/conversion/blob/master/screenshot.gif)
+![Image of Project](screenshot.gif)
 
 # Project Overview
 
