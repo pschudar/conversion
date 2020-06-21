@@ -1,6 +1,8 @@
 # measurement conversion
 Converts distance, volume, mass, speed, and temperatures from one format to several others
 
+![Image of Yaktocat](https://github.com/pschudar/conversion/blob/master/screenshot.png?raw=true)
+
 # Project Overview
 
 During a PHP Development course, I was asked to create an online tool that converts measurements from one format to another. The tool would need to handle items such as length or distance, area, volume and capacity, mass and weight, speed, and temperature. 
