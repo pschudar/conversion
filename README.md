@@ -1,7 +1,7 @@
 # measurement conversion
 Converts distance, volume, mass, speed, and temperatures from one format to several others
 
-![Image of Yaktocat](https://github.com/pschudar/conversion/blob/master/screenshot.png?raw=true)
+![Image of Project](https://github.com/pschudar/conversion/blob/master/screenshot.gif?raw=true)
 
 # Project Overview
 
