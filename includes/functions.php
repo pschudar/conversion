@@ -14,7 +14,7 @@ $server_request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', 522);
  */
 define('SERVER_REQUEST_METHOD', $server_request_method);
 /**
- * Filters Super-globa _SERVER['HTTP_X_REQUESTED_WITH'] with FILTER_SANITIZE_STRING (id: 513)
+ * Filters Super-global _SERVER['HTTP_X_REQUESTED_WITH'] with FILTER_SANITIZE_STRING (id: 513)
  * 
  * @var string
  */
