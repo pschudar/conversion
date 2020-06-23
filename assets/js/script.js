@@ -43,15 +43,18 @@
 
 
     function ajax_submit(event) {
-        var $form = $(this);
+        var $form = $(this),
+                loc = window.location.pathname,
+                cwd = loc.substring(0, loc.lastIndexOf('/'));
         let fd = new FormData(thisForm);
         event.preventDefault();
         var url = $form.attr("action"),
+                zero = cwd + '/includes/shared/zero.txt',
                 from_value_input = $('#from_value_input').val();
         // only POST when there is data
         if (!from_value_input) {
             var req = $.get({
-                url: url
+                url: zero
             });
             $('#to_value_input').val(0);
         }
@@ -67,15 +70,13 @@
             });
         }
         req.done(function () {
-            if (from_value_input) { // corrects the above error
-                var obj = JSON.parse(req.responseText);
-                if (obj.typeError === true) {
-                    $('#typeError').toast('show');
-                }
-                $('#to_value_input').val(obj.to_value);
-                // Hide the spinner
-                DisplaySpinner('no');
+            var obj = JSON.parse(req.responseText);
+            if (obj.typeError === true) {
+                $('#typeError').toast('show');
             }
+            $('#to_value_input').val(obj.to_value);
+            // Hide the spinner
+            DisplaySpinner('no');
         });
     }
 

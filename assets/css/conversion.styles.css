@@ -1,4 +1,4 @@
-html { 
+html {
     height: 100%; width: 100%;
     margin: 0; padding: 0;
 }
@@ -7,7 +7,7 @@ body {
     height: 100%; width: 100%;
     margin: 0; padding: 0;
     background: #EEE;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 }
 
@@ -24,10 +24,18 @@ h2 {
     background-position: right 10px bottom 10px;
     background-size: 10px;
 }
+
 .version {
     position: absolute;
+    bottom: 0;
+    left: 20px;
     font-size: x-small;
 }
+
 .hidden {
     visibility: hidden;
+}
+
+.no-bottom-border {
+    border-bottom: none;
 }
