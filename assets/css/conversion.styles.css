@@ -17,12 +17,16 @@ h2 {
 }
 
 .select-picker {
-    background: #EEE;
+    background-color: #EEE;
     color: #000;
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='gray' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='black' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 10px bottom 10px;
-    background-size: 10px;
+    background-position: right 10px bottom 50%;
+    background-size: 8px;
+}
+
+.custom-select-picker {
+    background-color: #EEE;
 }
 
 .version {
