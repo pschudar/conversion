@@ -30,7 +30,7 @@ require_once('includes/shared/public_header.php');
             <div class="card shadow">
                 <div class="card-body">
                     <div class="card-title">
-                        <div class="btn-group w-100" role="group">
+                        <div id="btn-group" class="btn-group w-100" role="group">
                             <button id="btn_select" type="button" class="btn btn-outline-light custom-select select-picker" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span id="btn_select_title"><?php echo $btn_title; ?></span>
                             </button>
@@ -46,11 +46,11 @@ require_once('includes/shared/public_header.php');
                     </div>
                     <div class="row">
                         <div id="left-body" class="col">
-                            <div class="input-group">
-                                <input placeholder="0" id="from_value_input" class="form-control no-bottom-border" type="text" name="from_value" value="<?php echo h($from_value); ?>" />
+                            <div id="from_value_div" class="input-group">
+                                <input autofocus="autofocus" placeholder="0" id="from_value_input" class="form-control no-bottom-border" type="text" name="from_value" value="<?php echo h($from_value); ?>" />
                             </div>
-                            <div class="input-group">
-                                <select name="from_unit" class="custom-select custom-select-sm select-picker" id="from_unit">
+                            <div id="from_unit_select" class="input-group">
+                                <select name="from_unit" class="custom-select custom-select-sm custom-select-picker" id="from_unit">
                                     <?php
                                     foreach ($select_options as $unit) {
                                         $opt = optionize($unit);
@@ -65,8 +65,8 @@ require_once('includes/shared/public_header.php');
                             <div id="to_value_div" class="input-group">
                                 <input placeholder="0" id="to_value_input" class="form-control no-bottom-border" type="text" name="to_value" value="<?php echo float_to_string($to_value); ?>" />
                             </div>
-                            <div id="to_value_select" class="input-group">
-                                <select name="to_unit" class="custom-select custom-select-sm select-picker" id="to_value">
+                            <div id="to_unit_select" class="input-group">
+                                <select name="to_unit" class="custom-select custom-select-sm custom-select-picker" id="to_unit">
                                     <?php
                                     foreach ($select_options as $unit) {
                                         $opt = optionize($unit);
