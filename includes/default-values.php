@@ -7,7 +7,7 @@ $to_unit = '';
 $to_value = '';
 $typeError = null;
 
-# filter _GET['p'] as a stripped string
+# filter _GET['p'] as a stripped string - defaults to length
 $getPage = filter_input(INPUT_GET, 'p', 513) ?? 'length';
 # default drop_class values to null
 $drop_class = ['length' => null, 'area' => null, 'volume' => null, 'mass' => null, 'speed' => null, 'temperature' => null];
