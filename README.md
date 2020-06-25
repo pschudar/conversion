@@ -57,6 +57,9 @@ With the project blue prints neatly organized and the approach settled on option
 - Length and distance: Meters
 - Volume and capacity: Liter
 - Mass and weight: Kilogram
+- Area: Square Meters
+- Speed: So few conversions, handles it in one function
+- Temperature: Celsius / Centigrade
 
 The project is small and tightknit, as such, defining a class or multiple classes is not a necessity. 
 
@@ -67,4 +70,6 @@ Use Bootstrap 4 CSS framework for the front-end design. As the deadline looms, n
 The project is to be done using PHP. jQuery or JavaScript usage is optional.
 
 I wanted the final project to look close to the conversion calculator found on <a href="https://www.google.com/search?sxsrf=ALeKk02yMSXoA6FrTHJd-_1B_uWdZgHx-w%3A1592765684913&source=hp&ei=9KzvXpTfNY_btAaMgLi4Cw&q=length+conversion&oq=length+conversion&gs_lcp=CgZwc3ktYWIQAzIKCAAQsQMQFBCHAjICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECCMQJzoFCAAQkQI6BQgAELEDOgUIABCDAToHCAAQFBCHAjoICAAQsQMQkQJQpRVY3CRgrCdoAHAAeACAAUmIAYAIkgECMTeYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwiUqe7GypPqAhWPLc0KHQwADrcQ4dUDCAk&uact=5" target="_blank">google.com</a>.
+
+
 
