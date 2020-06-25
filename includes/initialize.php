@@ -1,6 +1,6 @@
 <?php
 
-# Includes
+# constants
 require_once('includes/constants.php');
 # utility functions
 require_once('includes/utility-functions.php');
@@ -11,6 +11,5 @@ require_once('includes/conversion-options.php');
 # default values
 require_once('includes/default-values.php');
 
-
 # version
-$version_no = 'v1.0.0.2';
+$version_no = 'v1.0.0.3';
