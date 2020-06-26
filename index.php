@@ -84,7 +84,7 @@ require_once('includes/shared/public_header.php');
         <!-- // Page Content -->
     </div>
     <div class="row">
-        <div id="conversion-spinner" class="spinner-border text-secondary mt-2 mx-auto" role="status">
+        <div id="conversion-spinner" class="spinner-border text-secondary mt-2 mx-auto hidden" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
