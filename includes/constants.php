@@ -97,7 +97,7 @@ const MASS_TO_KILOGRAM = [
     'milligrams' => 0.000001,
     'grams' => 0.001,
     'kilograms' => 1,
-    'metric_tonnes' => 1000
+    'metric_tons' => 1000
 ];
 
 /**
