@@ -12,10 +12,18 @@ Beginning with length and distance measurements seemed like a great starting poi
 This is not always so cut and dry. Length or distance measurements come in many different flavors depending on geographical location or even context. The easiest starting point was determining some common units of measuring lengths.
 
 1. Imperial system of measurement
-  a. inch, foot, yard, mile
+  
+  inch, 
+  foot, 
+  yard, 
+  mile
 
 2. Metric
-  a. millimeter, centimeter, meter, kilometer
+
+  millimeter, 
+  centimeter, 
+  meter, 
+  kilometer
 
 While there are many other systems for measuring length or distance out there, such as the maritime measurements of a fathom, cable, nautical mile, or league, the project calls for only the most common types. It's possible that more will be added at a later date.
 
@@ -61,15 +69,26 @@ With the project blue prints neatly organized and the approach settled on option
 - Speed: So few conversions, handles it in one function
 - Temperature: Celsius / Centigrade
 
+If text is typed in, a typeError is to be thrown. Only integers or floating point numbers are allowed.
+
+Each category of measurement will have 3 functions. convert_to_*, convert_from_*, and convert_*
+
 The project is small and tightknit, as such, defining a class or multiple classes is not a necessity. 
 
 Functional programming would be acceptable, and due to a deadline, is recommended. May be modified to use Object Oriented Design later.
 
 Use Bootstrap 4 CSS framework for the front-end design. As the deadline looms, no need to worry too much about the look and feel.
 
-The project is to be done using PHP. jQuery or JavaScript usage is optional.
+The project is to be done using PHP. -- jQuery or JavaScript usage is optional. --
+
 
 I wanted the final project to look close to the conversion calculator found on <a href="https://www.google.com/search?sxsrf=ALeKk02yMSXoA6FrTHJd-_1B_uWdZgHx-w%3A1592765684913&source=hp&ei=9KzvXpTfNY_btAaMgLi4Cw&q=length+conversion&oq=length+conversion&gs_lcp=CgZwc3ktYWIQAzIKCAAQsQMQFBCHAjICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECCMQJzoFCAAQkQI6BQgAELEDOgUIABCDAToHCAAQFBCHAjoICAAQsQMQkQJQpRVY3CRgrCdoAHAAeACAAUmIAYAIkgECMTeYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwiUqe7GypPqAhWPLc0KHQwADrcQ4dUDCAk&uact=5" target="_blank">google.com</a>.
 
+# The finished product
 
+In the end, the web app looks and feels exactly the same on a large view port as it does on a small view port. It appears similar to the reference on google. The converter on google though has a different look on small view ports then it does on larger view ports.
+
+Given that JavaScript is enabled, the end-user has the ability to type into either input and output will appear in the opposite input box. 
+
+Otherwise, degradation is graceful and the end-user can still use the app just with limited functionality. Only the "from_value" input box on the left can be used to enter in values and the right input box, the "to_value" will display the results.
 
