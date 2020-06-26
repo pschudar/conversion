@@ -26,7 +26,8 @@ $length_options = [
     'millimeters',
     'centimeters',
     'meters',
-    'kilometers'
+    'kilometers',
+    'nautical miles'
 ];
 
 $mass_options = [
