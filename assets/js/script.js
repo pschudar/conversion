@@ -135,8 +135,6 @@
     // process the form on submit
     $('#conversion_form').submit(ajax_submit);
 
-
-
     /**
      * Selects desired default options from select drop downs
      * 
