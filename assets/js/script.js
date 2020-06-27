@@ -188,6 +188,7 @@
     switch (page) {
         case undefined:
             page = 'length';
+            select('feet', 1);
             break;
         case 'length':
             select('feet', 1);
