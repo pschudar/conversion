@@ -145,16 +145,25 @@
 
 
     /**
-     * Selects options in the select boxes on the converter tool
+     * Selects desired default options from select drop downs
      * 
-     * The first param, opt1, should be the value of the select option in the
-     * from_unit select should be selected when the page loads for the user.
-     * The second param, opt2, is optional. This allows for selecting the to_unit
-     * select option and works the same way as the first param. Finally, the
-     * function submits the form providing the user with a default page that 
-     * has default info when it loads.
+     * The first param, opt1, should be the value of the select option from the
+     * from_unit select. Given that you want 'feet' to be selected, this option
+     * should be 'feet' or whatever the value of the option to be displayed is.
      * 
+     * The second param, opt1_value, is the value that should be assigned to the
+     * to_value_input. If, for instance, p=temperature and the desired view by 
+     * default is to show the user 95 degrees F = 35 degrees celsius, then use:
+     * 
+     * <code>select('fahrenheit', 95, 'celsius');</code>
+     * 
+     * This will select 'fahrenheit', assign the int 95 to the input box, 
+     * select 'celsius' from the to_unit select box and submit the form.
+     * 
+     * The final param is opt2. If the desired default value that originally 
+     * populates is fine, then this param need not be used.
      * @param {string} opt1
+     * @param {float|int} opt1_value
      * @param {string} opt2
      * @returns {void}
      */
