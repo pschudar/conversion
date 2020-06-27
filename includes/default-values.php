@@ -10,8 +10,9 @@ $typeError = null;
 # filter _GET['p'] as a stripped string - defaults to length
 $getPage = filter_input(INPUT_GET, 'p', 513) ?? 'length';
 # default drop_class values to null
-$drop_class = ['length' => null, 'area' => null, 'volume' => null, 'mass' => null, 'speed' => null, 'temperature' => null];
-$form_action = '#';
+$drop_class = ['length' => null, 'area' => null, 'volume' => null, 'mass' => null, 'speed' => null, 'temperature' => null, 'storage'=> null];
+# default form_action
+$form_action = PHP_SELF . '?p=' . $getPage;
 
 switch ($getPage) {
     case 'length':
@@ -55,6 +56,13 @@ switch ($getPage) {
         $btn_title = 'Temperature';
         $drop_class['temperature'] = 'active';
         $select_options = $temp_options;
+        break;
+    case 'digital':
+        $page_title = 'Convert Digital Storage';
+        $function_call = 'convert_storage';
+        $btn_title = 'Digital Storage';
+        $drop_class['storage'] = 'active';
+        $select_options = $storage_options;
         break;
     default:
         $page_title = 'Convert Length';
