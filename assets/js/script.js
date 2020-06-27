@@ -12,13 +12,6 @@
             theToSelect = $('#to_unit'),
             theFromSelect = $('#from_unit');
 
-
-    // button as a custom-select list -- shows selected text
-    $('.dropdown-menu a').click(function (e) {
-        var selText = $(this).text();
-        $(this).parents('#btn-group').find('.custom-select').html(selText);
-    });
-
     // selects all text in the input box on focus
     $("input[type='number']").on('focus', function () {
         $(this).select();
