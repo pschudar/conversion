@@ -19,7 +19,7 @@ function h($string = '') {
  * @return bool
  */
 function is_post_request() {
-    return SERVER_REQUEST_METHOD == 'POST';
+    return strtolower(SERVER_REQUEST_METHOD) == 'post';
 }
 
 /**
@@ -71,15 +71,16 @@ function optionizer($unit, $opt, $from_to_unit) {
  * Rounds to $precision and trims extra trailing zeros
  * 
  * @internal : Utility
- * @param type $float
- * @param type $precision
- * @return type
+ * @param float $float
+ * @param int $precision
+ * @return string
  */
 function float_to_string($float, $precision = 10) {
-    // Typecast to ensure value is a float
+    # Typecast to ensure value is a float
     $float = (float) $float;
     $string = number_format($float, $precision, '.', '');
     $string = rtrim($string, '0');
     $string = rtrim($string, '.');
     return $string;
 }
+
