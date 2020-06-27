@@ -1,11 +1,60 @@
 (($) => {
     "use strict";
 
+    // define the form on this page as thisForm
+    let thisForm = document.querySelector('#conversion_form');
+    var loc = window.location.pathname,
+            // define the current working directory as cwd
+            cwd = loc.substring(0, loc.lastIndexOf('/')),
+            // create default form variables in the global scope
+            theToValue = $('#to_value_input'),
+            theFromValue = $('#from_value_input'),
+            theToSelect = $('#to_unit'),
+            theFromSelect = $('#from_unit');
+
+
     // button as a custom-select list -- shows selected text
-    $(".dropdown-menu a").click(function (e) {
+    $('.dropdown-menu a').click(function (e) {
         var selText = $(this).text();
         $(this).parents('#btn-group').find('.custom-select').html(selText);
     });
+
+    // selects all text in the input box on focus
+    $("input[type='number']").on('focus', function () {
+        $(this).select();
+    });
+
+    // add event listener to input box
+    $('#from_value_input').on('input', function () {
+        // define form variables based on this input
+        theToValue = $('#to_value_input');
+        theFromValue = $('#from_value_input');
+        theToSelect = $('#to_unit');
+        theFromSelect = $('#from_unit');
+    });
+
+    // add event listener to input box
+    $('#to_value_input').on('input', function () {
+        // define form variables based on this input
+        theToValue = $('#from_value_input');
+        theFromValue = $('#to_value_input');
+        theToSelect = $('#from_unit');
+        theFromSelect = $('#to_unit');
+    });
+
+    // jQuery plugin to grab query string params
+    $.QueryString = (function (paramsArray) {
+        let params = {};
+        for (let i = 0; i < paramsArray.length; ++i)
+        {
+            let param = paramsArray[i]
+                    .split('=', 2);
+            if (param.length !== 2)
+                continue;
+            params[param[0]] = decodeURIComponent(param[1].replace(/\+/g, " "));
+        }
+        return params;
+    })(window.location.search.substr(1).split('&'));
 
     /**
      * Determines whether to show the spinner
@@ -36,34 +85,7 @@
 
     // Hide the spinner by default
     displaySpinner('no');
-    
-    // define thisForm
-    let thisForm = document.querySelector('#conversion_form');
-    
-    // create form variables in the global scope
-    var theToValue;
-    var theFromValue;
-    var theToSelect;
-    var theFromSelect;
 
-    // add event listener to input box
-    $('#from_value_input').on('input', function () {
-        // define form variables based on this input
-        theToValue = $('#to_value_input');
-        theFromValue = $('#from_value_input');
-        theToSelect = $('#to_unit');
-        theFromSelect = $('#from_unit');
-    });
-
-    // add event listener to input box
-    $('#to_value_input').on('input', function () {
-        // define form variables based on this input
-        theToValue = $('#from_value_input');
-        theFromValue = $('#to_value_input');
-        theToSelect = $('#from_unit');
-        theFromSelect = $('#to_unit');
-    });
-    
     /**
      * Submits the form using FormData when called
      * 
@@ -71,9 +93,7 @@
      * @returns {int|float}
      */
     function ajax_submit(event) {
-        var t = $(this),
-                loc = window.location.pathname,
-                cwd = loc.substring(0, loc.lastIndexOf('/'));
+        var t = $(this);
         let fd = new FormData(thisForm);
         // set the formData to the correct values
         fd.set('to_value', theToValue.val());
@@ -121,5 +141,66 @@
     $('#conversion_form').on('input', ajax_submit);
     // process the form on submit
     $('#conversion_form').submit(ajax_submit);
+
+
+
+    /**
+     * Selects options in the select boxes on the converter tool
+     * 
+     * The first param, opt1, should be the value of the select option in the
+     * from_unit select should be selected when the page loads for the user.
+     * The second param, opt2, is optional. This allows for selecting the to_unit
+     * select option and works the same way as the first param. Finally, the
+     * function submits the form providing the user with a default page that 
+     * has default info when it loads.
+     * 
+     * @param {string} opt1
+     * @param {string} opt2
+     * @returns {void}
+     */
+    function select(opt1, opt1_value, opt2 = '') {
+        // select a default option
+        $('#from_unit option[value=' + opt1 + ']').prop('selected', true);
+        $('#from_value_input').val(opt1_value);
+        // select an optional second option for the to_unit
+        switch (opt2) {
+            case '':
+                break;
+            default:
+                $('#to_unit option[value=' + opt2 + ']').prop('selected', true);
+        }
+        // submit the form 
+        $('#submit').trigger('click');
+    }
+    // define the page variable
+    var page = $.QueryString['p'];
+    // default the value for from_value
+    $('#from_value_input').val(1);
+    switch (page) {
+        case undefined:
+            page = 'length';
+            break;
+        case 'length':
+            select('feet', 1);
+            break;
+        case 'area':
+            select('square_feet', 1);
+            break;
+        case 'volume':
+            select('us_cups', 1, 'metric_cups');
+            break;
+        case 'mass':
+            select('pounds', 1, 'ounces');
+        case 'speed':
+            select('miles_per_hour', 1, 'nautical_miles_per_hour');
+            break;
+        case 'temperature':
+            select('fahrenheit', 95, 'celsius');
+            break;
+        case 'digital':
+            select('gigabytes', 1, 'megabytes');
+            break;
+
+    }
 
 })(jQuery); // End of use strict
