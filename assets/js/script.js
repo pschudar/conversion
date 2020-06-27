@@ -210,6 +210,9 @@
         case 'digital':
             select('gigabytes', 1, 'megabytes');
             break;
+        default:
+            // PHP defaults the page to length. 
+            select('feet', 1);
 
     }
 
