@@ -6,7 +6,7 @@
  * @internal : Length
  * @param float $value
  * @param string $from_unit
- * @return string
+ * @return float|int|string
  * @throws TypeError
  */
 function convert_to_meters(float $value, string $from_unit) {
@@ -29,7 +29,7 @@ function convert_to_meters(float $value, string $from_unit) {
  * @internal : Length
  * @param float $value
  * @param string $to_unit
- * @return type
+ * @return float|string
  * @throws TypeError
  */
 function convert_from_meters(float $value, string $to_unit) {
@@ -66,8 +66,8 @@ function convert_length(string $value, string $from_unit, string $to_unit) {
  * 
  * @internal : Area
  * @param float $value
- * @param type $from_unit
- * @return type
+ * @param string $from_unit
+ * @return float|string
  * @throws TypeError
  */
 function convert_to_square_meters(float $value, string $from_unit) {
@@ -92,7 +92,7 @@ function convert_to_square_meters(float $value, string $from_unit) {
  * @internal : Area
  * @param float $value
  * @param string $to_unit
- * @return type
+ * @return float|string
  * @throws TypeError
  */
 function convert_from_square_meters(float $value, string $to_unit) {
@@ -136,7 +136,7 @@ function convert_area(string $value, string $from_unit, string $to_unit) {
  * @internal : Volume
  * @param float $value
  * @param string $from_unit
- * @return type
+ * @return float|string
  * @throws TypeError
  */
 function convert_to_liters(float $value, string $from_unit) {
@@ -197,7 +197,7 @@ function convert_volume(string $value, string $from_unit, string $to_unit) {
  * @internal : Mass
  * @param float $value
  * @param string $from_unit
- * @return type
+ * @return float|string
  * @throws TypeError
  */
 function convert_to_kilograms(float $value, string $from_unit) {
@@ -243,7 +243,7 @@ function convert_from_kilograms(float $value, string $to_unit) {
  * @param string $value
  * @param string $from_unit
  * @param string $to_unit
- * @return type
+ * @return float
  */
 function convert_mass(string $value, string $from_unit, string $to_unit) {
     $kg_value = convert_to_kilograms($value, $from_unit);
@@ -252,34 +252,71 @@ function convert_mass(string $value, string $from_unit, string $to_unit) {
 }
 
 /**
+ * Converts speed from one format into meters per second
+ * 
+ * Prior to v1.0.0.4, speed was 'hacked' together, but functional. It has been
+ * rewritten for readability and uniformity with the rest of the script.
+ * 
+ * @internal : Speed
+ * @since v1.0.0.4
+ * @param float $value
+ * @param string $from_unit
+ * @return float|string
+ * @throws TypeError
+ */
+function convert_to_meters_per_second(float $value, string $from_unit) {
+    switch (is_numeric($value)) :
+        case true:
+            if (array_key_exists($from_unit, SPEED_TO_METERS_PER_SECOND)) {
+                return $value * SPEED_TO_METERS_PER_SECOND[$from_unit];
+            } else {
+                return UNSUPPORTED;
+            }
+            break;
+        default:
+            throw new TypeError();
+    endswitch;
+}
+/**
+ * Converts speed from meters per second to other formats
+ * 
+ * Prior to v1.0.0.4, speed was 'hacked' together, but functional. It has been
+ * rewritten for readability and uniformity with the rest of the script.
+ * 
+ * @internal : Speed
+ * @since v1.0.0.4
+ * @param float $value
+ * @param string $from_unit
+ * @return float|string
+ * @throws TypeError
+ */
+function convert_from_meters_per_second(float $value, string $from_unit) {
+    switch (is_numeric($value)) :
+        case true:
+            if (array_key_exists($from_unit, SPEED_TO_METERS_PER_SECOND)) {
+                return $value / SPEED_TO_METERS_PER_SECOND[$from_unit];
+            } else {
+                return UNSUPPORTED;
+            }
+            break;
+        default:
+            throw new TypeError();
+    endswitch;
+}
+/**
  * Converts speed measurements from one unit to the others
  * 
  * @internal : Speed
+ * @since v1.0.0.4
  * @param type $value
  * @param string $from_unit
  * @param string $to_unit
- * @return int
+ * @return float
  */
 function convert_speed($value, string $from_unit, string $to_unit) {
-    if ($from_unit == 'knots') {
-        $from_unit = 'nautical_miles_per_hour';
-    }
-    if ($to_unit == 'knots') {
-        $to_unit = 'nautical_miles_per_hour';
-    }
-
-    list($from_dist, $from_time) = explode('_per_', $from_unit);
-    list($to_dist, $to_time) = explode('_per_', $to_unit);
-
-    if ($from_time == 'hour') {
-        $value /= 3600;
-    }
-    $value = convert_length($value, $from_dist, $to_dist);
-    if ($to_time == 'hour') {
-        $value *= 3600;
-    }
-
-    return $value;
+    $mps_value = convert_to_meters_per_second($value, $from_unit);
+    $new_value = convert_from_meters_per_second($mps_value, $to_unit);
+    return $new_value;
 }
 
 /**
@@ -288,7 +325,7 @@ function convert_speed($value, string $from_unit, string $to_unit) {
  * @internal : Temperature
  * @param float $value
  * @param string $from_unit
- * @return float
+ * @return float|string
  */
 function convert_to_celsius(float $value, string $from_unit) {
     switch ($from_unit) {
@@ -298,6 +335,8 @@ function convert_to_celsius(float $value, string $from_unit) {
             return ($value - 32) / 1.8;
         case 'kelvin':
             return $value - 273.15;
+        case 'rankine':
+            return ($value - 491.67) * (5 / 9);
         default:
             return UNSUPPORTED;
     }
@@ -309,7 +348,7 @@ function convert_to_celsius(float $value, string $from_unit) {
  * @internal : Temperature
  * @param float $value
  * @param string $to_unit
- * @return float
+ * @return float|string
  */
 function convert_from_celsius(float $value, string $to_unit) {
     switch ($to_unit) {
@@ -319,6 +358,8 @@ function convert_from_celsius(float $value, string $to_unit) {
             return ($value * 1.8) + 32;
         case 'kelvin':
             return $value + 273.15;
+        case 'rankine':
+            return ($value * (9 / 5) + 491.67);
         default:
             return UNSUPPORTED;
     }
@@ -338,3 +379,65 @@ function convert_temperature(string $value, string $from_unit, string $to_unit) 
     $new_value = convert_from_celsius($celsius_value, $to_unit);
     return $new_value;
 }
+
+/**
+ * Converts other storage formats to bits
+ * 
+ * @internal : Digital Storage
+ * @param float $value
+ * @param string $from_unit
+ * @return string
+ * @throws TypeError
+ */
+function convert_to_bits(float $value, string $from_unit) {
+    switch (is_float($value)) :
+        case true:
+            if (array_key_exists($from_unit, STORAGE_TO_BITS)) {
+                return $value * STORAGE_TO_BITS[$from_unit];
+            } else {
+                return UNSUPPORTED;
+            }
+            break;
+        default:
+            throw new TypeError();
+    endswitch;
+}
+
+/**
+ * Converts bits to other formats
+ * 
+ * @internal : Digital Storage
+ * @param float $value
+ * @param string $to_unit
+ * @return float|string
+ * @throws TypeError
+ */
+function convert_from_bits(float $value, string $to_unit) {
+    switch (is_float($value)) :
+        case true:
+            if (array_key_exists($to_unit, STORAGE_TO_BITS)) {
+                return $value / STORAGE_TO_BITS[$to_unit];
+            } else {
+                return UNSUPPORTED;
+            }
+            break;
+        default:
+            throw new TypeError();
+    endswitch;
+}
+
+/**
+ * Processes the digital storage conversions
+ * 
+ * @internal : Digital Storage
+ * @param string $value
+ * @param string $from_unit
+ * @param string $to_unit
+ * @return float
+ */
+function convert_storage(string $value, string $from_unit, string $to_unit) {
+    $bit_value = convert_to_bits($value, $from_unit);
+    $new_value = convert_from_bits($bit_value, $to_unit);
+    return $new_value;
+}
+
