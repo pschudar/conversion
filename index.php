@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 require_once('includes/initialize.php');
-$form_action = PHP_SELF . '?p=' . $getPage;
-
 
 if (is_post_request()) {
     require_once('includes/filtered-post-vars.php');
@@ -41,13 +39,14 @@ require_once('includes/shared/public_header.php');
                                 <a class="dropdown-item <?php echo $drop_class['mass']; ?>" href="index.php?p=mass">Mass and weight</a>
                                 <a class="dropdown-item <?php echo $drop_class['speed']; ?>" href="index.php?p=speed">Speed</a>
                                 <a class="dropdown-item <?php echo $drop_class['temperature']; ?>" href="index.php?p=temperature">Temperature</a>
+                                <a class="dropdown-item <?php echo $drop_class['storage']; ?>" href="index.php?p=digital">Digital Storage</a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div id="left-body" class="col">
                             <div id="from_value_div" class="input-group">
-                                <input autofocus="autofocus" placeholder="0" id="from_value_input" class="form-control no-bottom-border" type="text" name="from_value" value="<?php echo h($from_value); ?>" />
+                                <input autofocus="autofocus" placeholder="0" id="from_value_input" class="form-control no-bottom-border" type="number" step="any" name="from_value" value="<?php echo h($from_value); ?>" />
                             </div>
                             <div id="from_unit_select" class="input-group">
                                 <select name="from_unit" class="custom-select custom-select-sm custom-select-picker" id="from_unit">
@@ -63,7 +62,7 @@ require_once('includes/shared/public_header.php');
                         </div>
                         <div id="right-body" class="col">
                             <div id="to_value_div" class="input-group">
-                                <input placeholder="0" id="to_value_input" class="form-control no-bottom-border" type="text" name="to_value" value="<?php echo float_to_string($to_value); ?>" />
+                                <input placeholder="0" id="to_value_input" class="form-control no-bottom-border" type="number" name="to_value" step="any" value="<?php echo float_to_string($to_value); ?>" />
                             </div>
                             <div id="to_unit_select" class="input-group">
                                 <select name="to_unit" class="custom-select custom-select-sm custom-select-picker" id="to_unit">
@@ -75,7 +74,7 @@ require_once('includes/shared/public_header.php');
                                     ?>
                                 </select>
                             </div>
-                            <input class="btn btn-outline-secondary float-right mt-2" type="submit" name="submit" value="Submit" />
+                            <input id="submit" class="btn btn-outline-secondary float-right mt-2" type="submit" name="submit" value="Submit" />
                         </div>
                     </div>
                 </div>
@@ -91,7 +90,6 @@ require_once('includes/shared/public_header.php');
     <div class="row">
         <h2>&nbsp;</h2>
         <div class="mx-auto" aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-            <!-- spacer: instead of using -- style="position: absolute; top: 68px;" -->
             <div id="typeError" class="toast fade" data-delay="5500" data-autohide="true">
                 <div class="toast-header">
                     <span class="mr-auto text-danger"> &#9888;  Warning</span>

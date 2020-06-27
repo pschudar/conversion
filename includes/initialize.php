@@ -12,4 +12,4 @@ require_once('includes/conversion-options.php');
 require_once('includes/default-values.php');
 
 # version
-$version_no = 'v1.0.0.3';
+$version_no = 'v1.0.0.4';

@@ -14,6 +14,7 @@ $area_options = [
     'square centimeters',
     'square meters',
     'square kilometers',
+    'square fathoms',
     'acres',
     'hectares'
 ];
@@ -27,33 +28,35 @@ $length_options = [
     'centimeters',
     'meters',
     'kilometers',
-    'nautical miles'
+    'nautical miles',
+    'fathoms'
 ];
 
 $mass_options = [
-  "ounces",
-  "pounds",
-  "stones",
-  "long tons",
-  "short tons",
-  "milligrams",
-  "grams",
-  "kilograms",
-  "metric tonnes"
+    'ounces',
+    'pounds',
+    'stones',
+    'long tons',
+    'short tons',
+    'milligrams',
+    'grams',
+    'kilograms',
+    'metric tons',
 ];
 
 $speed_options = [
-    "feet per second",
-    "miles per hour",
-    "meters per second",
-    "kilometers per hour",
-    "knots"
+    'feet per second',
+    'miles per hour',
+    'meters per second',
+    'kilometers per hour',
+    'nautical miles per hour'
 ];
 
 $temp_options = [
-    "Celsius",
-    "Fahrenheit",
-    "Kelvin"
+    'Celsius',
+    'Fahrenheit',
+    'Kelvin',
+    'Rankine'
 ];
 
 $volume_options = [
@@ -66,6 +69,9 @@ $volume_options = [
     'Imperial ounces',
     'Imperial tablespoons',
     'Imperial teaspoons',
+    'Metric cups',
+    'Metric tablespoons',
+    'Metric teaspoons',
     'US gallons',
     'US quarts',
     'US pints',
@@ -77,4 +83,14 @@ $volume_options = [
     'cubic meters',
     'liters',
     'milliliters'
+];
+
+$storage_options = [
+    'bits',
+    'bytes',
+    'kilobytes',
+    'megabytes',
+    'gigabytes',
+    'terabytes',
+    'petabytes'
 ];
