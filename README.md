@@ -35,7 +35,7 @@ Yes, you can. The most simple route to take would be to copy an existing class f
 4. Still on default-values.php, add a new case to the switch statement that suits your new unit.
 5. If desired, update /assets/js/script.js. Read the docs for the select function and apply an additional switch statement for default values
 
-The final step would be me asking you to create a pull request if you create a new conversion unit. I'll review it and merge it in.
+The final step would be me asking you to create a pull request if you create a new conversion unit. I'll review it and merge it in. Of course, it goes without saying but.. I'll add your name to the documentation with an @author tag if you would like.
 
 # Project Overview
 
