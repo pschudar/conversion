@@ -1,0 +1,44 @@
+html {
+    height: 100%; width: 100%;
+    margin: 0; padding: 0;
+}
+
+body {
+    margin: 0; padding: 0;
+    background: #EEE;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.select-picker {
+    background-color: #EEE;
+    color: #000;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='black' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px bottom 50%;
+    background-size: 8px;
+}
+
+.custom-select-picker {
+    background-color: #EEE;
+}
+
+.version {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    font-size: x-small;
+}
+
+.hidden {
+    display: none;
+}
+
+.no-bottom-border {
+    border-bottom: none;
+}
