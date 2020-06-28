@@ -4,7 +4,7 @@
  * Holds the current version number
  * @var string
  */
-const VERSION_NO = 'v1.1.0.0';
+const VERSION_NO = 'v1.1.0.1';
 /**
  * Filters Super-global _SERVER['REQUEST_METHOD'] with FILTER_SANITIZE_FULL_SPECIAL_CHARS (id: 522)
  * 
