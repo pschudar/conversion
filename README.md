@@ -7,6 +7,36 @@ Converts distance, volume, mass, speed, and temperatures from one format to seve
 
 It is pretty simple. No database required. Simply clone the repository or download the .zip file. Move the meansurement-conversion-master directory to your web server's public_html or htdocs directory, then load it up in your browser. If you installed in /home/paul/public_html/measurement-conversion and your server is on your local machine, visit localhost/meansurement-conversion or whatever you renamed the directory to.
 
+# Current Conversions
+
+As of 06.28.2020, this tool will convert:
+
+1. Area
+2. Digital Storage
+3. Fuel Economy
+4. Length and distance
+5. Mass and weight
+6. Speed
+7. Temperature
+8. Time
+9. Volume and capacity
+
+# How it works - the basics
+
+It begins by converting units of measurement to a common unit. Hang on, let me explain that. Using the Time class as an example, it converts everything to seconds. 1 second = 1 second. 1 minute = 60 seconds, so on and so forth. Then, it converts the requested unit from seconds to whatever you chose. For example, if you selected to convert 1 week into days, the application knows that 1 days is equivalent to 86,400 seconds and 1 week is equivalent to 604,800. How does it know that? Well, it is programmed to know these things. From here, it divides 604,800 seconds / 86,400 seconds and that equals 7 days. On the other hand, if you chose 2 days and wanted to know how many seconds that was, all that it does there is take what it already knows, that 1 day is 86,400 seconds and it multiplies it by 2 which equals 172800. The entire script is fairly simple, really. 
+
+# Can I add other units to convert?
+
+Yes, you can. The most simple route to take would be to copy an existing class file found in /includes/classes/conversion/ and rename it. If you're converting Energy, name it energy.class.php. The naming is important here as the autoload function is looking for this exact format. Once you've renamed the file, open it in your favorite text editor.
+
+1. Copy an existing class file and rename it appropriately. Of course, edit the actual class name within. I advise against using area or temperature classes as a template.
+2. Update index.php: around line 40, you will see the menu items. Copy one line and paste it in where you would like it to appear. Rename the variables appropriately.
+3. Update /includes/shared/default-values.php: Add a new $drop_class element to the array suitable for the new unit
+4. Still on default-values.php, add a new case to the switch statement that suits your new unit.
+5. If desired, update /assets/js/script.js. Read the docs for the select function and apply an additional switch statement for default values
+
+The final step would be me asking you to create a pull request if you create a new conversion unit. I'll review it and merge it in.
+
 # Project Overview
 
 During a PHP Development course, I was asked to create an online tool that converts measurements from one format to another. The tool would need to handle items such as length or distance, area, volume and capacity, mass and weight, speed, temperature, and digital storage units. 
@@ -73,13 +103,13 @@ With the project blue prints neatly organized and the approach settled on option
 - Speed: Meters per second
 - Temperature: Celsius / Centigrade
 
-~~If text is typed in, a typeError is to be thrown. Only integers or floating point numbers are allowed.
+~~If text is typed in, a typeError is to be thrown. Only integers or floating point numbers are allowed.~~
 
 After the project was reviewed, I modified the code so it will catch the typeError but does nothing with it currently. The UI uses a touch of HTML 5 which allowed me to set the inputs to accept only numbers (with the exception of the letter 'e'). This is subject to breaking changes at any given moment.
 
 Each category of measurement will have at least 3 functions. convertTo*, convertFrom*, and convert*
 
-~~The project is small and tightknit, as such, defining a class or multiple classes is not a necessity. 
+~~The project is small and tightknit, as such, defining a class or multiple classes is not a necessity. ~~
 
 The codebase has been refactored to include an object-oriented design. v1.1.0.0 is the first iteration of the new design changes.
 
