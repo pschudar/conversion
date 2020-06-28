@@ -9,8 +9,8 @@ $typeError = null;
 
 # filter _GET['p'] as a stripped string - defaults to length
 $getPage = filter_input(INPUT_GET, 'p', 513) ?? 'length';
-# default drop_class values to null
-$drop_class = ['length' => null, 'area' => null, 'volume' => null, 'mass' => null, 'speed' => null, 'temperature' => null, 'storage' => null, 'fuel' => null];
+# default expected pages - drop_class values to null
+$drop_class = ['length' => null, 'area' => null, 'volume' => null, 'mass' => null, 'speed' => null, 'temperature' => null, 'storage' => null, 'fuel' => null, 'time' => null];
 # default form_action
 $form_action = PHP_SELF . '?p=' . $getPage;
 
@@ -71,6 +71,13 @@ switch ($getPage) {
         $btn_title = 'Fuel Economy';
         $drop_class['fuel'] = 'active';
         $select_options = array_keys(\conversion\FuelEconomy::CONVERSION_ARRAY);
+        break;
+    case 'time':
+        $instance = new \conversion\Time();
+        $page_title = 'Convert Time';
+        $btn_title = 'Time';
+        $drop_class['time'] = 'active';
+        $select_options = array_keys(\conversion\Time::CONVERSION_ARRAY);
         break;
     default:
         $instance = new \conversion\Length();
