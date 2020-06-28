@@ -1,22 +1,26 @@
+
 <?php
-declare(strict_types=1);
+
+use \utility\Utility;
+
 require_once('includes/initialize.php');
 
-if (is_post_request()) {
-    require_once('includes/filtered-post-vars.php');
+if (Utility::isPostRequest()) {
+    require_once(SHARED_PATH . 'filtered-post-vars.php');
+
     try {
-        $to_value = $function_call($from_value, $from_unit, $to_unit);
-    } catch (TypeError $e) {
-        #echo 'TypeError: ', $e->getMessage(), "\n";
+        $to_value = $instance->$functionCall($from_value, $from_unit, $to_unit);
+    } catch (Throwable $t) {
+        #echo '', $t->getMessage(), "\n";
         $typeError = true;
     }
-    if (is_ajax_request()) {
-        $response = ['to_value' => float_to_string($to_value), 'typeError' => $typeError];
+    if (Utility::isAjaxRequest()) {
+        $response = ['to_value' => Utility::floatToString($to_value), 'typeError' => $typeError];
         echo json_encode($response);
         exit();
     }
 }
-require_once('includes/shared/public_header.php');
+require_once(SHARED_PATH . 'public_header.php');
 ?>
 
 <div class="container-fluid">
@@ -24,7 +28,7 @@ require_once('includes/shared/public_header.php');
     <div class="row">
 
         <!-- Page Content -->
-        <form class="mx-auto" id="conversion_form" action="<?php echo h($form_action); ?>" method="post">
+        <form class="mx-auto" id="conversion_form" action="<?php echo Utility::h($form_action); ?>" method="POST">
             <div class="card shadow">
                 <div class="card-body">
                     <div class="card-title">
@@ -46,30 +50,30 @@ require_once('includes/shared/public_header.php');
                     <div class="row">
                         <div id="left-body" class="col">
                             <div id="from_value_div" class="input-group">
-                                <input autofocus="autofocus" placeholder="0" id="from_value_input" class="form-control no-bottom-border" type="number" step="any" name="from_value" value="<?php echo h($from_value); ?>" />
+                                <input autofocus="autofocus" placeholder="0" id="from_value_input" class="form-control no-bottom-border" type="number" step="any" name="from_value" value="<?php echo Utility::h($from_value); ?>" />
                             </div>
                             <div id="from_unit_select" class="input-group">
                                 <select name="from_unit" class="custom-select custom-select-sm custom-select-picker" id="from_unit">
                                     <?php
                                     foreach ($select_options as $unit) {
-                                        $opt = optionize($unit);
-                                        echo optionizer($unit, $opt, $from_unit);
+                                        $opt = Utility::optionize($unit);
+                                        echo Utility::optionizer($unit, $opt, $from_unit);
                                     }
                                     ?>
                                 </select>
                             </div>
-                            <span class="version text-muted float-left"><?php echo $version_no; ?></span>
+                            <span class="version text-muted float-left"><?php echo VERSION_NO; ?></span>
                         </div>
                         <div id="right-body" class="col">
                             <div id="to_value_div" class="input-group">
-                                <input placeholder="0" id="to_value_input" class="form-control no-bottom-border" type="number" name="to_value" step="any" value="<?php echo float_to_string($to_value); ?>" />
+                                <input placeholder="0" id="to_value_input" class="form-control no-bottom-border" type="number" name="to_value" step="any" value="<?php echo Utility::floatToString($to_value); ?>" />
                             </div>
                             <div id="to_unit_select" class="input-group">
                                 <select name="to_unit" class="custom-select custom-select-sm custom-select-picker" id="to_unit">
                                     <?php
                                     foreach ($select_options as $unit) {
-                                        $opt = optionize($unit);
-                                        echo optionizer($unit, $opt, $to_unit);
+                                        $opt = Utility::optionize($unit);
+                                        echo Utility::optionizer($unit, $opt, $to_unit);
                                     }
                                     ?>
                                 </select>
@@ -87,23 +91,7 @@ require_once('includes/shared/public_header.php');
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <div class="row">
-        <h2>&nbsp;</h2>
-        <div class="mx-auto" aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-            <div id="typeError" class="toast fade" data-delay="5500" data-autohide="true">
-                <div class="toast-header">
-                    <span class="mr-auto text-danger"> &#9888;  Warning</span>
-                    <small>just now</small>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="toast-body">
-                    Non-numeric value has been entered. 
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
 <?php
-require_once('includes/shared/public_footer.php');
+require_once(SHARED_PATH . 'public_footer.php');
