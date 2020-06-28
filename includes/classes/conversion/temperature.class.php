@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1); # commenting this out for now
+declare(strict_types=1);
 
 namespace conversion;
 
@@ -17,7 +17,7 @@ class Temperature {
     private $processedValue;
 
     /**
-     * Processes the digital storage conversions
+     * Processes the temperature conversions
      * 
      * @param string $value
      * @param string $from_unit
@@ -31,7 +31,7 @@ class Temperature {
     }
 
     /**
-     * Converts other storage formats to bits
+     * Converts other temperature formats to celsius / centigrade
      * 
      * @param float $value
      * @param string $from_unit
@@ -55,7 +55,7 @@ class Temperature {
     }
 
     /**
-     * Converts bits to other formats
+     * Converts celsius / centigrade  to other formats
      * 
      * @param float $value
      * @param string $to_unit
