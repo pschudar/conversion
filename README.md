@@ -3,9 +3,13 @@ Converts distance, volume, mass, speed, and temperatures from one format to seve
 
 ![Image of Project](snapshot.gif)
 
+# How to use this application
+
+It is pretty simple. No database required. Simply clone the repository or download the .zip file. Move the meansurement-conversion-master directory to your web server's public_html or htdocs directory, then load it up in your browser. If you installed in /home/paul/public_html/measurement-conversion and your server is on your local machine, visit localhost/meansurement-conversion or whatever you renamed the directory to.
+
 # Project Overview
 
-During a PHP Development course, I was asked to create an online tool that converts measurements from one format to another. The tool would need to handle items such as length or distance, area, volume and capacity, mass and weight, speed, and temperature. 
+During a PHP Development course, I was asked to create an online tool that converts measurements from one format to another. The tool would need to handle items such as length or distance, area, volume and capacity, mass and weight, speed, temperature, and digital storage units. 
 
 Beginning with length and distance measurements seemed like a great starting point that would drive the design decisions. Length and Distance are both terms that describe a measurement between two points. One could note that height, width, as well as depth are also considered length measurements. These measurements, though, also provide details regarding the orientations of the lengths of an object. 
 
@@ -66,14 +70,18 @@ With the project blue prints neatly organized and the approach settled on option
 - Volume and capacity: Liter
 - Mass and weight: Kilogram
 - Area: Square Meters
-- Speed: So few conversions, handles it in one function
+- Speed: Meters per second
 - Temperature: Celsius / Centigrade
 
-If text is typed in, a typeError is to be thrown. Only integers or floating point numbers are allowed.
+~~If text is typed in, a typeError is to be thrown. Only integers or floating point numbers are allowed.
 
-Each category of measurement will have 3 functions. convert_to_*, convert_from_*, and convert_*
+After the project was reviewed, I modified the code so it will catch the typeError but does nothing with it currently. The UI uses a touch of HTML 5 which allowed me to set the inputs to accept only numbers (with the exception of the letter 'e'). This is subject to breaking changes at any given moment.
 
-The project is small and tightknit, as such, defining a class or multiple classes is not a necessity. 
+Each category of measurement will have at least 3 functions. convertTo*, convertFrom*, and convert*
+
+~~The project is small and tightknit, as such, defining a class or multiple classes is not a necessity. 
+
+The codebase has been refactored to include an object-oriented design. v1.1.0.0 is the first iteration of the new design changes.
 
 Functional programming would be acceptable, and due to a deadline, is recommended. May be modified to use Object Oriented Design later.
 
@@ -81,14 +89,19 @@ Use Bootstrap 4 CSS framework for the front-end design. As the deadline looms, n
 
 The project is to be done using PHP. -- jQuery or JavaScript usage is optional. --
 
-
 I wanted the final project to look close to the conversion calculator found on <a href="https://www.google.com/search?sxsrf=ALeKk02yMSXoA6FrTHJd-_1B_uWdZgHx-w%3A1592765684913&source=hp&ei=9KzvXpTfNY_btAaMgLi4Cw&q=length+conversion&oq=length+conversion&gs_lcp=CgZwc3ktYWIQAzIKCAAQsQMQFBCHAjICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECCMQJzoFCAAQkQI6BQgAELEDOgUIABCDAToHCAAQFBCHAjoICAAQsQMQkQJQpRVY3CRgrCdoAHAAeACAAUmIAYAIkgECMTeYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwiUqe7GypPqAhWPLc0KHQwADrcQ4dUDCAk&uact=5" target="_blank">google.com</a>.
 
 # The finished product
 
-In the end, the web app looks and feels exactly the same on a large view port as it does on a small view port. It appears similar to the reference on google. The converter on google though has a different look on small view ports then it does on larger view ports.
+In the end, the web application looks and feels exactly the same on a large view port as it does on a small view port. Visually and functionally, it appears to be similar to the reference on google. The converter on google, however, has a different look on small view ports then it does on larger view ports. While it does look sleek, I prefer the same experience regardless of the viewport size. 
 
 Given that JavaScript is enabled, the end-user has the ability to type into either input and output will appear in the opposite input box. 
 
-Otherwise, degradation is graceful and the end-user can still use the app just with limited functionality. Only the "from_value" input box on the left can be used to enter in values and the right input box, the "to_value" will display the results.
+By default, once a section loads, the application selects the to_unit and the from_unit select drop down list options and submits the form via ajax to provide the user something other than an empty form to look at.
+
+With the modification of the input boxes going from type=text to type=number, a handy tool appears on the right hand side of the box when it's hovered over. This allows a person to change the value in the box with a simple click.
+
+Moving from one box to the other, say, from the left to the right, or vice versa for that matter, once focused, the application will auto-select / highlight the numbers so changing the values is a quick and painlesss.
+
+Without JavaScript enabled, degradation is graceful and the end-user can still use the application, though -- with limited functionality. Only the "from_value" input box on the left can be used to enter in values and the right input box, the "to_value" will display the results.
 
