@@ -107,17 +107,13 @@ With the project blue prints neatly organized and the approach settled on option
 
 After the project was reviewed, I modified the code so it will catch the typeError but does nothing with it currently. The UI uses a touch of HTML 5 which allowed me to set the inputs to accept only numbers (with the exception of the letter 'e'). This is subject to breaking changes at any given moment.
 
-Each category of measurement will have at least 3 functions. convertTo*, convertFrom*, and convert*
+Each category of measurement will have at least one method: processConversion(); convertToUnit and convertFromUnit() have been moved to the \calc\Calculate trait.
 
-~~The project is small and tightknit, as such, defining a class or multiple classes is not a necessity. ~~
+The project is small and tightknit. As of version 1.1.0.0, the code-base has been refactored with an object oriented design
 
-The codebase has been refactored to include an object-oriented design. v1.1.0.0 is the first iteration of the new design changes.
+It utilizes a CDN to include Bootstrap 4, jQuery and jQuery Popper. This makes the overall UI easy to look at and use regardless of viewport size.
 
-Functional programming would be acceptable, and due to a deadline, is recommended. May be modified to use Object Oriented Design later.
-
-Use Bootstrap 4 CSS framework for the front-end design. As the deadline looms, no need to worry too much about the look and feel.
-
-The project is to be done using PHP. -- jQuery or JavaScript usage is optional. --
+jQuery is used to easily facilitate Ajax functionality. Popper is utilized with the main category drop down menu. It is styled to look like a custom-select.
 
 I wanted the final project to look close to the conversion calculator found on <a href="https://www.google.com/search?sxsrf=ALeKk02yMSXoA6FrTHJd-_1B_uWdZgHx-w%3A1592765684913&source=hp&ei=9KzvXpTfNY_btAaMgLi4Cw&q=length+conversion&oq=length+conversion&gs_lcp=CgZwc3ktYWIQAzIKCAAQsQMQFBCHAjICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECCMQJzoFCAAQkQI6BQgAELEDOgUIABCDAToHCAAQFBCHAjoICAAQsQMQkQJQpRVY3CRgrCdoAHAAeACAAUmIAYAIkgECMTeYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwiUqe7GypPqAhWPLc0KHQwADrcQ4dUDCAk&uact=5" target="_blank">google.com</a>.
 
