@@ -27,7 +27,7 @@ class Length {
     private $processedValue;
 
     /**
-     * Processes the digital storage conversions
+     * Processes the length conversions
      * 
      * @param string $value
      * @param string $from_unit
@@ -41,7 +41,7 @@ class Length {
     }
 
     /**
-     * Converts other storage formats to bits
+     * Converts other length formats to meters
      * 
      * @param float $value
      * @param string $from_unit
@@ -57,7 +57,7 @@ class Length {
     }
 
     /**
-     * Converts bits to other formats
+     * Converts meters to other formats
      * 
      * @param float $value
      * @param string $to_unit
