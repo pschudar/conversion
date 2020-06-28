@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1); # commenting this out for now
+declare(strict_types=1);
 
 namespace conversion;
 
@@ -38,7 +38,7 @@ class Volume {
     private $processedValue;
 
     /**
-     * Processes the digital storage conversions
+     * Processes the volume and capacity conversions
      * 
      * @param string $value
      * @param string $from_unit
@@ -52,7 +52,7 @@ class Volume {
     }
 
     /**
-     * Converts other storage formats to bits
+     * Converts other volume and capacity formats to liters
      * 
      * @param float $value
      * @param string $from_unit
@@ -68,7 +68,7 @@ class Volume {
     }
 
     /**
-     * Converts bits to other formats
+     * Converts volume and capacity from liters to other formats
      * 
      * @param float $value
      * @param string $to_unit
