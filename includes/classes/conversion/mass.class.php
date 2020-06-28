@@ -24,7 +24,7 @@ class Mass {
     private $processedValue;
 
     /**
-     * Processes the digital storage conversions
+     * Processes the mass and weight conversions
      * 
      * @param string $value
      * @param string $from_unit
@@ -38,7 +38,7 @@ class Mass {
     }
 
     /**
-     * Converts other storage formats to bits
+     * Converts other mass or weight formats to kilograms
      * 
      * @param float $value
      * @param string $from_unit
@@ -54,7 +54,7 @@ class Mass {
     }
 
     /**
-     * Converts bits to other formats
+     * Converts mass or weight from kilograms to other formats
      * 
      * @param float $value
      * @param string $to_unit
