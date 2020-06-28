@@ -29,7 +29,7 @@ It begins by converting units of measurement to a common unit. Hang on, let me e
 
 Yes, you can. The most simple route to take would be to copy an existing class file found in /includes/classes/conversion/ and rename it. If you're converting Energy, name it energy.class.php. The naming is important here as the autoload function is looking for this exact format. Once you've renamed the file, open it in your favorite text editor.
 
-1. Copy an existing class file and rename it appropriately. Of course, edit the actual class name within. I advise against using area or temperature classes as a template.
+1. Copy an existing class file and rename it appropriately. Of course, edit the actual class name within. I advise against using area or temperature classes as a template. Modify the CONVERSION_ARRAY constant with the appropriate units and formulas to convert items to a specific common unit.
 2. Update index.php: around line 40, you will see the menu items. Copy one line and paste it in where you would like it to appear. Rename the variables appropriately.
 3. Update /includes/shared/default-values.php: Add a new $drop_class element to the array suitable for the new unit
 4. Still on default-values.php, add a new case to the switch statement that suits your new unit.
