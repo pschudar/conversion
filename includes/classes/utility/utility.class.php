@@ -52,6 +52,19 @@ class Utility {
     }
 
     /**
+     * Processes a string by removing underscores and replacing them with a space
+     * 
+     * Used to clean up the viewable text in select drop down lists.
+     * This is a good fix for the issue but I may update it later.
+     * 
+     * @param string $string
+     * @return string
+     */
+    public static function reoptionize(string $string) {
+        return str_replace('_', ' ', strtolower($string));
+    }
+
+    /**
      * Creates and populates Select list <code><option></option></code> tags
      * 
      * Accepts $unit from foreach loop, $opt is the return value from the 
@@ -68,7 +81,8 @@ class Utility {
         if ($from_to_unit == $opt) {
             $list .= " selected";
         }
-        $list .= ">{$unit}</option>";
+        $newUnit = self::reoptionize($unit);
+        $list .= ">{$newUnit}</option>";
         return $list;
     }
 
