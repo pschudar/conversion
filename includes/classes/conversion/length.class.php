@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1); # commenting this out for now
+declare(strict_types=1);
 
 namespace conversion;
 
