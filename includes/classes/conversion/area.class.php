@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace conversion;
 
 class Area {
-
     # uses same conversion array as Length
+
     private $value;
     private $processedValue;
 
@@ -58,8 +58,8 @@ class Area {
                 return self::calculate($value, $to_unit, \conversion\Length::CONVERSION_ARRAY, 'divide');
         endswitch;
     }
-    
-        /**
+
+    /**
      * Crunches the numbers and returns the value requested
      * 
      * This method begins by ensuring that $value is a floating point number.
@@ -67,6 +67,11 @@ class Area {
      * Then, the calculation is performed and returned.
      * If the $unit is not a supported unit, the user is notified.
      * If $value is not a floating point number, a new TypeError is thrown.
+     * 
+     * For the moment, I removed the use \calc\Calculate; statement and 
+     * directly wrote the following two methods in as the operate method
+     * works differently for every other class. This is subject to change
+     * at any given moment.
      * 
      * @param float $value
      * @param string $unit
