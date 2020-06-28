@@ -204,6 +204,9 @@
         case 'fuel':
             select('us_miles_per_gallon', 1, 'imperial_miles_per_gallon');
             break;
+        case 'time':
+            select('weeks', 1, 'days');
+            break;
         default:
             // PHP defaults the page to length. 
             select('feet', 1);
