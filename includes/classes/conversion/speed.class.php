@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1); # commenting this out for now
+declare(strict_types=1);
 
 namespace conversion;
 
@@ -20,7 +20,7 @@ class Speed {
     private $processedValue;
 
     /**
-     * Processes the digital storage conversions
+     * Processes the speed conversions
      * 
      * @param string $value
      * @param string $from_unit
@@ -34,7 +34,7 @@ class Speed {
     }
 
     /**
-     * Converts other storage formats to bits
+     * Converts other speed formats to meters per second
      * 
      * @param float $value
      * @param string $from_unit
@@ -50,7 +50,7 @@ class Speed {
     }
 
     /**
-     * Converts bits to other formats
+     * Converts meters per second to other formats
      * 
      * @param float $value
      * @param string $to_unit
