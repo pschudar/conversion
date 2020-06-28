@@ -29,47 +29,17 @@ class Length {
     /**
      * Processes the length conversions
      * 
+     * @internal Common Unit: Meters
+     * 
      * @param string $value
      * @param string $from_unit
      * @param string $to_unit
      * @return float
      */
-    public function convertLength(float $value, string $from_unit, string $to_unit) {
-        $this->value = self::convertToMeters($value, $from_unit, $to_unit);
-        $this->processedValue = self::convertFromMeters($this->value, $to_unit, $from_unit);
+    public function processConversion(float $value, string $from_unit, string $to_unit) {
+        $this->value = self::convertToUnit($value, $from_unit, $to_unit);
+        $this->processedValue = self::convertFromUnit($this->value, $to_unit, $from_unit);
         return $this->processedValue;
-    }
-
-    /**
-     * Converts other length formats to meters
-     * 
-     * @param float $value
-     * @param string $from_unit
-     * @return float|string
-     */
-    private static function convertToMeters(float $value, string $from_unit) {
-        switch (array_key_exists($from_unit, self::CONVERSION_ARRAY)) :
-            case false:
-                throw new \conversion\ConversionError(UNSUPPORTED . ': ' . $from_unit);
-            default:
-                return self::calculate($value, $from_unit, self::CONVERSION_ARRAY, 'multiply');
-        endswitch;
-    }
-
-    /**
-     * Converts meters to other formats
-     * 
-     * @param float $value
-     * @param string $to_unit
-     * @return float|string
-     */
-    private static function convertFromMeters(float $value, string $to_unit) {
-        switch (array_key_exists($to_unit, self::CONVERSION_ARRAY)) :
-            case false:
-                throw new \conversion\ConversionError(UNSUPPORTED . ': ' . $to_unit);
-            default:
-                return self::calculate($value, $to_unit, self::CONVERSION_ARRAY, 'divide');
-        endswitch;
     }
 
 }
