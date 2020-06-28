@@ -39,6 +39,11 @@ h2 {
     display: none;
 }
 
+.dropdown-item.active{
+    background-color:#EEE;
+    color: black;
+}
+
 .no-bottom-border {
     border-bottom: none;
 }
