@@ -1,4 +1,5 @@
 
+
 <?php
 
 use \utility\Utility;
@@ -37,13 +38,14 @@ require_once(SHARED_PATH . 'public_header.php');
                                 <span id="btn_select_title"><?php echo $btn_title; ?></span>
                             </button>
                             <div class="dropdown-menu w-100" aria-labelledby="btnGroupDrop1">
-                                <a class="dropdown-item <?php echo $drop_class['length']; ?>" href="index.php?p=length">Length and distance</a>
                                 <a class="dropdown-item <?php echo $drop_class['area']; ?>" href="index.php?p=area">Area</a>
-                                <a class="dropdown-item <?php echo $drop_class['volume']; ?>" href="index.php?p=volume">Volume and capacity</a>
+                                <a class="dropdown-item <?php echo $drop_class['storage']; ?>" href="index.php?p=digital">Digital Storage</a>
+                                <a class="dropdown-item <?php echo $drop_class['fuel']; ?>" href="index.php?p=fuel">Fuel Economy</a>
+                                <a class="dropdown-item <?php echo $drop_class['length']; ?>" href="index.php?p=length">Length and distance</a>
                                 <a class="dropdown-item <?php echo $drop_class['mass']; ?>" href="index.php?p=mass">Mass and weight</a>
                                 <a class="dropdown-item <?php echo $drop_class['speed']; ?>" href="index.php?p=speed">Speed</a>
                                 <a class="dropdown-item <?php echo $drop_class['temperature']; ?>" href="index.php?p=temperature">Temperature</a>
-                                <a class="dropdown-item <?php echo $drop_class['storage']; ?>" href="index.php?p=digital">Digital Storage</a>
+                                <a class="dropdown-item <?php echo $drop_class['volume']; ?>" href="index.php?p=volume">Volume and capacity</a>
                             </div>
                         </div>
                     </div>
