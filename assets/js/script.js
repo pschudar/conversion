@@ -201,6 +201,9 @@
         case 'digital':
             select('gigabytes', 1, 'megabytes');
             break;
+        case 'fuel':
+            select('us_miles_per_gallon', 1, 'imperial_miles_per_gallon');
+            break;
         default:
             // PHP defaults the page to length. 
             select('feet', 1);
