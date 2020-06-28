@@ -10,8 +10,8 @@ class FuelEconomy {
 
     const CONVERSION_ARRAY = [
         'kilometers_per_liter' => 1,
-        'us_miles_per_gallon' => 2.35215,
-        'imperial_miles_per_gallon' => 2.82481
+        'imperial_miles_per_gallon' => 0.354006,
+        'us_miles_per_gallon' => 0.425144
     ];
 
     private $value;
