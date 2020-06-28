@@ -1,5 +1,6 @@
 
 
+
 <?php
 
 use \utility\Utility;
@@ -10,7 +11,7 @@ if (Utility::isPostRequest()) {
     require_once(SHARED_PATH . 'filtered-post-vars.php');
 
     try {
-        $to_value = $instance->$functionCall($from_value, $from_unit, $to_unit);
+        $to_value = $instance->processConversion($from_value, $from_unit, $to_unit);
     } catch (Throwable $t) {
         #echo '', $t->getMessage(), "\n";
         $typeError = true;
