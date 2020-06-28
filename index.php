@@ -1,6 +1,4 @@
 
-
-
 <?php
 
 use \utility\Utility;
@@ -46,6 +44,7 @@ require_once(SHARED_PATH . 'public_header.php');
                                 <a class="dropdown-item <?php echo $drop_class['mass']; ?>" href="index.php?p=mass">Mass and weight</a>
                                 <a class="dropdown-item <?php echo $drop_class['speed']; ?>" href="index.php?p=speed">Speed</a>
                                 <a class="dropdown-item <?php echo $drop_class['temperature']; ?>" href="index.php?p=temperature">Temperature</a>
+                                <a class="dropdown-item <?php echo $drop_class['time']; ?>" href="index.php?p=time">Time</a>
                                 <a class="dropdown-item <?php echo $drop_class['volume']; ?>" href="index.php?p=volume">Volume and capacity</a>
                             </div>
                         </div>
