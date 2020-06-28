@@ -4,8 +4,17 @@ declare(strict_types=1);
 
 namespace conversion;
 
+/**
+ * Area Class
+ * 
+ * Utilizes \conversion\Length::CONVERSION_ARRAY by stripping 'square_' from the 
+ * array key. 
+ * 
+ * Results are calculated differently for Area and as such, the class does not
+ * utilize the \calc\Calculate trait. Instead, it contains its own methods for
+ * the conversion.
+ */
 class Area {
-    # uses same conversion array as Length
 
     private $value;
     private $processedValue;
@@ -13,15 +22,42 @@ class Area {
     /**
      * Processes the area conversions
      * 
+     * @internal Common Unit: Square Meters
+     * 
      * @param string $value
      * @param string $from_unit
      * @param string $to_unit
      * @return float
      */
-    public function convertArea(float $value, string $from_unit, string $to_unit) {
+    public function processConversion(float $value, string $from_unit, string $to_unit) {
         $this->value = self::convertToSquareMeters($value, $from_unit, $to_unit);
         $this->processedValue = self::convertFromSquareMeters($this->value, $to_unit, $from_unit);
         return $this->processedValue;
+    }
+
+    /**
+     * Compiles a list of array keys, adds 'square_' to the front of the key name.
+     * 
+     * @return array
+     */
+    public function selectOptions() {
+
+        $array_keys = array_keys(\conversion\Length::CONVERSION_ARRAY);
+
+        foreach ($array_keys as $area_key):
+
+            switch ($area_key) :
+                case 'acres':
+                case 'hectares':
+                    $area_options[] = $area_key;
+                    break;
+                default:
+                    $area_options[] = 'square_' . $area_key;
+            endswitch;
+
+        endforeach;
+
+        return $area_options;
     }
 
     /**
@@ -36,7 +72,7 @@ class Area {
         $from_unit = str_replace('square_', '', $from_unit);
         switch (array_key_exists($from_unit, \conversion\Length::CONVERSION_ARRAY)) :
             case false:
-                throw new \conversion\ConversionError(UNSUPPORTED . ': ' . $from_unit);
+                throw new \utility\ConversionError(UNSUPPORTED . ': ' . $from_unit);
             default:
                 return self::calculate($value, $from_unit, \conversion\Length::CONVERSION_ARRAY, 'multiply');
         endswitch;
@@ -53,7 +89,7 @@ class Area {
         $to_unit = str_replace('square_', '', $to_unit);
         switch (array_key_exists($to_unit, \conversion\Length::CONVERSION_ARRAY)) :
             case false:
-                throw new \conversion\ConversionError(UNSUPPORTED . ': ' . $to_unit);
+                throw new \utility\ConversionError(UNSUPPORTED . ': ' . $to_unit);
             default:
                 return self::calculate($value, $to_unit, \conversion\Length::CONVERSION_ARRAY, 'divide');
         endswitch;
@@ -90,13 +126,14 @@ class Area {
     }
 
     /**
-     * Determines whether to multiply or divide for the particular conversion
+     * Determines whether to multiply or divide for the conversion calculation
      * 
      * @param float $value
      * @param string $unit
      * @param array $const
      * @param string $calc
      * @return float|string
+     * @throws \utility\ConversionError
      */
     private static function operate(float $value, string $unit, array $const, string $calc) {
         if (array_key_exists($unit, $const)) :
@@ -107,7 +144,7 @@ class Area {
                     return $value * pow($const[$unit], 2);
             endswitch;
         else :
-            return UNSUPPORTED;
+            throw new \utility\ConversionError(UNSUPPORTED . ': ' . $unit);
         endif;
     }
 

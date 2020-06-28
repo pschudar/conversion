@@ -30,13 +30,13 @@ trait Calculate {
     }
 
     /**
-     * Determines whether to multiply or divide for the particular conversion
-     * 
+     * Determines whether to multiply or divide for the conversion
      * @param float $value
      * @param string $unit
      * @param array $const
      * @param string $calc
      * @return float|string
+     * @throws \utility\ConversionError
      */
     private static function operate(float $value, string $unit, array $const, string $calc) {
         if (array_key_exists($unit, $const)) :
@@ -47,8 +47,40 @@ trait Calculate {
                     return $value * $const[$unit];
             endswitch;
         else :
-            return UNSUPPORTED;
+            throw new \utility\ConversionError(UNSUPPORTED . ': ' . $unit);
         endif;
+    }
+
+    /**
+     * Converts unit to the common unit used
+     * 
+     * @param float $value
+     * @param string $from_unit
+     * @return float|string
+     */
+    private static function convertToUnit(float $value, string $from_unit) {
+        switch (array_key_exists($from_unit, self::CONVERSION_ARRAY)) :
+            case false:
+                throw new \utility\ConversionError(UNSUPPORTED . ': ' . $from_unit);
+            default:
+                return self::calculate($value, $from_unit, self::CONVERSION_ARRAY, 'multiply');
+        endswitch;
+    }
+
+    /**
+     * Converts the common unit to other formats
+     * 
+     * @param float $value
+     * @param string $to_unit
+     * @return float|string
+     */
+    private static function convertFromUnit(float $value, string $to_unit) {
+        switch (array_key_exists($to_unit, self::CONVERSION_ARRAY)) :
+            case false:
+                throw new \utility\ConversionError(UNSUPPORTED . ': ' . $to_unit);
+            default:
+                return self::calculate($value, $to_unit, self::CONVERSION_ARRAY, 'divide');
+        endswitch;
     }
 
 }

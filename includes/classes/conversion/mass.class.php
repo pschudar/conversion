@@ -26,47 +26,17 @@ class Mass {
     /**
      * Processes the mass and weight conversions
      * 
+     * @internal Common Unit: Kilograms
+     * 
      * @param string $value
      * @param string $from_unit
      * @param string $to_unit
      * @return float
      */
-    public function convertMass(float $value, string $from_unit, string $to_unit) {
-        $this->value = self::convertToKilograms($value, $from_unit, $to_unit);
-        $this->processedValue = self::convertFromKilograms($this->value, $to_unit, $from_unit);
+    public function processConversion(float $value, string $from_unit, string $to_unit) {
+        $this->value = self::convertToUnit($value, $from_unit, $to_unit);
+        $this->processedValue = self::convertFromUnit($this->value, $to_unit, $from_unit);
         return $this->processedValue;
-    }
-
-    /**
-     * Converts other mass or weight formats to kilograms
-     * 
-     * @param float $value
-     * @param string $from_unit
-     * @return float|string
-     */
-    private static function convertToKilograms(float $value, string $from_unit) {
-        switch (array_key_exists($from_unit, self::CONVERSION_ARRAY)) :
-            case false:
-                throw new \conversion\ConversionError(UNSUPPORTED . ': ' . $from_unit);
-            default:
-                return self::calculate($value, $from_unit, self::CONVERSION_ARRAY, 'multiply');
-        endswitch;
-    }
-
-    /**
-     * Converts mass or weight from kilograms to other formats
-     * 
-     * @param float $value
-     * @param string $to_unit
-     * @return float|string
-     */
-    private static function convertFromKilograms(float $value, string $to_unit) {
-        switch (array_key_exists($to_unit, self::CONVERSION_ARRAY)) :
-            case false:
-                throw new \conversion\ConversionError(UNSUPPORTED . ': ' . $to_unit);
-            default:
-                return self::calculate($value, $to_unit, self::CONVERSION_ARRAY, 'divide');
-        endswitch;
     }
 
 }

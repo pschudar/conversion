@@ -1,6 +1,6 @@
 <?php
 
-namespace conversion;
+namespace utility;
 
 class ConversionError extends \Exception {
 

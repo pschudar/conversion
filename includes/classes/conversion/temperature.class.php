@@ -24,7 +24,7 @@ class Temperature {
      * @param string $to_unit
      * @return float
      */
-    public function convertTemperature(float $value, string $from_unit, string $to_unit) {
+    public function processConversion(float $value, string $from_unit, string $to_unit) {
         $this->value = self::convertToCelsius($value, $from_unit, $to_unit);
         $this->processedValue = self::convertFromCelsius($this->value, $to_unit, $from_unit);
         return $this->processedValue;
@@ -49,17 +49,18 @@ class Temperature {
                 case 'rankine':
                     return ($value - 491.67) * (5 / 9);
                 default:
-                    throw new \conversion\ConversionError(UNSUPPORTED . ': ' . $from_unit);
+                    throw new \utility\ConversionError(UNSUPPORTED . ': ' . $from_unit);
             endswitch;
         } throw new \conversion\ConversionError('Enter a valid value');
     }
 
     /**
-     * Converts celsius / centigrade  to other formats
+     * Converts celsius / centigrade to other formats
      * 
      * @param float $value
      * @param string $to_unit
      * @return float|string
+     * @throws \utility\ConversionError
      */
     private static function convertFromCelsius(float $value, string $to_unit) {
         if (is_float($value)) {
@@ -73,9 +74,9 @@ class Temperature {
                 case 'rankine':
                     return ($value * (9 / 5) + 491.67);
                 default:
-                    throw new \conversion\ConversionError(UNSUPPORTED . ': ' . $to_unit);
+                    throw new \utility\ConversionError(UNSUPPORTED . ': ' . $to_unit);
             endswitch;
-        } throw new \conversion\ConversionError('Enter a valid value');
+        } throw new \utility\ConversionError('Enter a valid value');
     }
 
 }
