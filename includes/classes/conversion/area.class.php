@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace conversion;
 
 /**
- * Area Class
+ * Area
  * 
  * Utilizes \conversion\Length::CONVERSION_ARRAY 
  * 
