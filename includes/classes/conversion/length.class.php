@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace conversion;
 
+/**
+ * Length
+ * 
+ * @category length
+ * @package conversion
+ * @author Paul Schudar
+ * @copyright Copyright (c) 2020, Paul Schudar
+ * @license https://opensource.org/licenses/mit-license.php MIT License
+ * @internal Common Unit: Meters
+ */
 class Length {
 
     use \calc\Calculate;
@@ -23,13 +33,8 @@ class Length {
         'fathoms' => 1.8288
     ];
 
-    private $value;
-    private $processedValue;
-
     /**
-     * Processes the length conversions
-     * 
-     * @internal Common Unit: Meters
+     * Processes the conversion
      * 
      * @param string $value
      * @param string $from_unit
@@ -37,9 +42,7 @@ class Length {
      * @return float
      */
     public function processConversion(float $value, string $from_unit, string $to_unit) {
-        $this->value = self::convertToUnit($value, $from_unit, $to_unit);
-        $this->processedValue = self::convertFromUnit($this->value, $to_unit, $from_unit);
-        return $this->processedValue;
+        return self::processConversions($value, $from_unit, $to_unit);
     }
 
 }
