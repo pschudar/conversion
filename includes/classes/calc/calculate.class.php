@@ -1,8 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace calc;
 
+/**
+ * Processes, calculates, and returns the requested value back to the calling class
+ * 
+ * @internal Unused by Area and Temperature
+ */
 trait Calculate {
+
+    /**
+     * Holds the value of the converted to_unit
+     * @var float 
+     */
+    private static $theToValue;
+
+    /**
+     * Holds the value of the converted from_unit
+     * @var float 
+     */
+    private static $theFromValue;
+
+    /**
+     * Processes the conversions
+     * 
+     * @internal Common Unit: seconds
+     * 
+     * @param string $value
+     * @param string $from_unit
+     * @param string $to_unit
+     * @return float
+     */
+    public static function processConversions(float $value, string $from_unit, string $to_unit) {
+        self::$theToValue = self::convertToUnit($value, $from_unit, $to_unit);
+        self::$theFromValue = self::convertFromUnit(self::$theToValue, $to_unit, $from_unit);
+        return self::$theFromValue;
+    }
 
     /**
      * Crunches the numbers and returns the value requested
