@@ -4,6 +4,17 @@ declare(strict_types=1);
 
 namespace conversion;
 
+/**
+ * DigitalStorage
+ * 
+ * @category digital storage
+ * @package conversion
+ * @author Paul Schudar
+ * @copyright Copyright (c) 2020, Paul Schudar
+ * @license https://opensource.org/licenses/mit-license.php MIT License
+ * @internal Common Unit: bits (binary 1024)
+ * @todo Add a section for decimal 1000
+ */
 class DigitalStorage {
 
     use \calc\Calculate;
@@ -18,14 +29,8 @@ class DigitalStorage {
         'petabytes' => 9007199254740600
     ];
 
-    private $value;
-    private $processedValue;
-
     /**
-     * Processes the digital storage conversions
-     * 
-     * @internal Common Unit: Bits (binary 1024)
-     * @todo Add decimal 1000
+     * Processes the conversion
      * 
      * @param string $value
      * @param string $from_unit
@@ -33,9 +38,7 @@ class DigitalStorage {
      * @return float
      */
     public function processConversion(float $value, string $from_unit, string $to_unit) {
-        $this->value = self::convertToUnit($value, $from_unit, $to_unit);
-        $this->processedValue = self::convertFromUnit($this->value, $to_unit, $from_unit);
-        return $this->processedValue;
+        return self::processConversions($value, $from_unit, $to_unit);
     }
 
 }
