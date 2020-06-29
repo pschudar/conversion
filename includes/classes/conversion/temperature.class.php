@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace conversion;
 
 /**
- * Temperature
- * 
- * Utilizes \conversion\Length::CONVERSION_ARRAY by stripping 'square_' from the 
- * array key. 
+ * Temperature 
  * 
  * Results are calculated differently for Temperature and as such, the class does not
  * utilize the \calc\Calculate trait. Instead, it contains its own methods for
