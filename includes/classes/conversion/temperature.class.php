@@ -81,7 +81,7 @@ class Temperature {
                 default:
                     throw new \utility\ConversionError(UNSUPPORTED . ': ' . $from_unit);
             endswitch;
-        } throw new \conversion\ConversionError(INVALID);
+        } throw new \conversion\ConversionError(self::INVALID);
     }
 
     /**
@@ -106,7 +106,7 @@ class Temperature {
                 default:
                     throw new \utility\ConversionError(UNSUPPORTED . ': ' . $to_unit);
             endswitch;
-        } throw new \utility\ConversionError(INVALID);
+        } throw new \utility\ConversionError(self::INVALID);
     }
 
 }
