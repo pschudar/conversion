@@ -13,15 +13,17 @@ trait Calculate {
 
     /**
      * Holds the value of the converted to_unit
+     * 
      * @var float 
      */
-    private static $theToValue;
+    private static $convertedTo;
 
     /**
      * Holds the value of the converted from_unit
+     * 
      * @var float 
      */
-    private static $theFromValue;
+    private static $convertedFrom;
 
     /**
      * Processes the conversions
@@ -34,9 +36,9 @@ trait Calculate {
      * @return float
      */
     public static function processConversions(float $value, string $from_unit, string $to_unit) {
-        self::$theToValue = self::convertToUnit($value, $from_unit, $to_unit);
-        self::$theFromValue = self::convertFromUnit(self::$theToValue, $to_unit, $from_unit);
-        return self::$theFromValue;
+        self::$convertedTo = self::convertToUnit($value, $from_unit, $to_unit);
+        self::$convertedFrom = self::convertFromUnit(self::$convertedTo, $to_unit, $from_unit);
+        return self::$convertedFrom;
     }
 
     /**
