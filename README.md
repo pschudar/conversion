@@ -127,7 +127,7 @@ By default, once a section loads, the application selects the to_unit and the fr
 
 With the modification of the input boxes going from type=text to type=number, a handy tool appears on the right hand side of the box when it's hovered over. This allows a person to change the value in the box with a simple click.
 
-Moving from one box to the other, say, from the left to the right, or vice versa for that matter, once focused, the application will auto-select / highlight the numbers so changing the values is a quick and painlesss.
+Moving from one box to the other, say, from the left to the right, or vice versa for that matter, once focused, the application will auto-select / highlight the numbers so changing the values is quick and painless.
 
 Without JavaScript enabled, degradation is graceful and the end-user can still use the application, though -- with limited functionality. Only the "from_value" input box on the left can be used to enter in values and the right input box, the "to_value" will display the results.
 
