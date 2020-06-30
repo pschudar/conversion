@@ -4,6 +4,17 @@ declare(strict_types=1);
 
 namespace utility;
 
+/**
+ * Utility
+ * 
+ * Provides a container in which to hold validation and misc methods
+ * 
+ * @category utility
+ * @package conversion
+ * @author Paul Schudar
+ * @copyright Copyright (c) 2020, Paul Schudar
+ * @license https://opensource.org/licenses/mit-license.php MIT License
+ */
 class Utility {
 
     /**
