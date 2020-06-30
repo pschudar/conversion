@@ -56,11 +56,12 @@ class Temperature {
     }
 
     /**
-     * Converts other temperature formats to celsius / centigrade
+     * Converts other temperature formats to Celsius / centigrade
      * 
      * @param float $value
      * @param string $from_unit
-     * @return float|string
+     * @return float
+     * @throws \utility\ConversionError
      */
     private static function convertToUnit(float $value, string $from_unit) {
         if (is_float($value)) {
@@ -76,7 +77,7 @@ class Temperature {
                 default:
                     throw new \utility\ConversionError(UNSUPPORTED . ': ' . $from_unit);
             endswitch;
-        } throw new \conversion\ConversionError(self::INVALID);
+        } throw new \utility\ConversionError(INVALID);
     }
 
     /**
@@ -101,7 +102,7 @@ class Temperature {
                 default:
                     throw new \utility\ConversionError(UNSUPPORTED . ': ' . $to_unit);
             endswitch;
-        } throw new \utility\ConversionError(self::INVALID);
+        } throw new \utility\ConversionError(INVALID);
     }
 
 }
