@@ -60,7 +60,7 @@ class Utility {
      * @param string $string
      * @return string
      */
-    public static function reoptionize(string $string) {
+    public static function selectionize(string $string) {
         return str_replace('_', ' ', strtolower($string));
     }
 
@@ -77,11 +77,13 @@ class Utility {
      * @return string
      */
     public static function optionizer(string $unit, string $opt, string $from_to_unit) {
-        $list = "<option value=\"{$opt}\"";
+        $filteredOption = self::h($opt);
+        $list = "<option value=\"{$filteredOption}\"";
         if ($from_to_unit == $opt) {
             $list .= " selected";
         }
-        $newUnit = self::reoptionize($unit);
+        $new = self::selectionize($unit);
+        $newUnit = self::h($new);
         $list .= ">{$newUnit}</option>";
         return $list;
     }
@@ -92,16 +94,16 @@ class Utility {
      * Rounds to $precision and trims extra trailing zeros
      * 
      * @internal : Utility
-     * @param float $float
+     * @param string $float
      * @param int $precision
      * @return string
      */
-    public static function floatToString($float, $precision = 10) {
+    public static function floatToString(string $float, int $precision = 10) {
         # Typecast to ensure value is a float
-        $float = (float) $float;
-        $string = number_format($float, $precision, '.', '');
-        $string = rtrim($string, '0');
-        $string = rtrim($string, '.');
+        $cast = (float) $float;
+        $formatted = number_format($cast, $precision, '.', '');
+        $str = rtrim($formatted, '0');
+        $string = rtrim($str, '.');
         return $string;
     }
 
