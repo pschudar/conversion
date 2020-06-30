@@ -1,115 +1,67 @@
 <?php
 
-declare(strict_types=1);
-
-namespace utility;
+/**
+ * Holds the current version number
+ * 
+ * @var string
+ */
+const VERSION_NO = 'v1.1.0.2';
 
 /**
- * Utility
+ * Filters Super-global _SERVER['REQUEST_METHOD'] with FILTER_SANITIZE_FULL_SPECIAL_CHARS (id: 522)
  * 
- * Provides a container in which to hold validation and misc methods
- * 
- * @category utility
- * @package conversion
- * @author Paul Schudar
- * @copyright Copyright (c) 2020, Paul Schudar
- * @license https://opensource.org/licenses/mit-license.php MIT License
+ * @var string
  */
-class Utility {
+$server_request_method = filter_input(INPUT_SERVER, 'REQUEST_METHOD', 522);
 
-    /**
-     * Runs a string through htmlspecialchars()
-     * 
-     * Provides easy access to an otherwise lengthy function name.
-     * 
-     * @param string $string
-     * @return string
-     */
-    public static function h(string $string = '') {
-        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-    }
+/**
+ * Constant that uses $server_request_method's value
+ * 
+ * Possible values include: GET, POST, or REQUEST
+ * @var string
+ */
+define('SERVER_REQUEST_METHOD', $server_request_method);
 
-    /**
-     * Determines if the request was a post request
-     * 
-     * @return bool
-     */
-    public static function isPostRequest() {
-        return strtolower(SERVER_REQUEST_METHOD) == 'post';
-    }
+/**
+ * Filters Super-global _SERVER['HTTP_X_REQUESTED_WITH'] with FILTER_SANITIZE_STRING (id: 513)
+ * 
+ * @var string
+ */
+$server_http_xrw = filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH', 513);
 
-    /**
-     * Determines if the request was an ajax request
-     * 
-     * @return Boolean
-     */
-    public static function isAjaxRequest() {
-        return !empty(HTTP_XRW) &&
-                strtolower(HTTP_XRW) == 'xmlhttprequest';
-    }
+/**
+ * Constant that uses $server_http_xrw's value
+ * 
+ * Possible values include XMLHttpRequest
+ */
+define('HTTP_XRW', $server_http_xrw);
 
-    /**
-     * Processes a string by removing blank spaces and replacing them with underscores
-     * 
-     * @param string $string
-     * @return string
-     */
-    public static function optionize(string $string) {
-        return str_replace(' ', '_', strtolower($string));
-    }
+/**
+ * Filters Super-global _SERVER['PHP_SELF'] with _FULL_SPECIAL_CHARS (id: 522)
+ */
+$php_self = filter_input(INPUT_SERVER, 'PHP_SELF', 522);
 
-    /**
-     * Processes a string by removing underscores and replacing them with a space
-     * 
-     * Used to clean up the viewable text in select drop down lists.
-     * This is a good fix for the issue but I may update it later.
-     * 
-     * @param string $string
-     * @return string
-     */
-    public static function selectionize(string $string) {
-        return str_replace('_', ' ', strtolower($string));
-    }
+/**
+ * Constant that utilizes $php_self's value for the main form action attribute
+ * 
+ * @var string
+ */
+define('PHP_SELF', $php_self);
 
-    /**
-     * Creates and populates Select list <code><option></option></code> tags
-     * 
-     * Accepts $unit from foreach loop, $opt is the return value from the 
-     * optionize function, from_to_unit is from_unit or to_unit
-     * 
-     * @param string $unit
-     * @param string $opt
-     * @param string $from_to_unit
-     * @return string
-     */
-    public static function optionizer(string $unit, string $opt, string $from_to_unit) {
-        $filteredOption = self::h($opt);
-        $list = "<option value=\"{$filteredOption}\"";
-        if ($from_to_unit == $opt) {
-            $list .= " selected";
-        }
-        $new = self::selectionize($unit);
-        $newUnit = self::h($new);
-        $list .= ">{$newUnit}</option>";
-        return $list;
-    }
+/**
+ * Constant used as a return value in many different functions. 
+ * 
+ * This simply provides an easy way to offer up a uniform message across the board.
+ * In the unlikely event that a unit that does not exist in in the from_unit or to_unit
+ * drop down select lists, this is the message received by the end-user.
+ * 
+ * @var string
+ */
+const UNSUPPORTED = 'Unsupported Unit';
 
-    /**
-     * Formats a float to a string while avoiding default use of scientific notation
-     * 
-     * Rounds to $precision and trims extra trailing zeros
-     * 
-     * @param string $float
-     * @param int $precision
-     * @return string
-     */
-    public static function floatToString(string $float, int $precision = 10) {
-        # Typecast to ensure value is a float
-        $cast = (float) $float;
-        $formatted = number_format($cast, $precision, '.', '');
-        $str = rtrim($formatted, '0');
-        $string = rtrim($str, '.');
-        return $string;
-    }
-
-}
+/**
+ * Constant used as a return value. Currently unsure if this will remain.
+ * 
+ * @var string
+ */
+const INVALID = 'Enter a valid value';
