@@ -23,18 +23,18 @@ namespace conversion;
 class Area {
 
     /**
-     * Holds the value of the converted to_unit value
+     * Holds the value of the unit of measurement in the common unit
      * 
      * @var float 
      */
-    private static $convertedTo;
+    private static $convertTo;
 
     /**
-     * Holds the value of the converted from_unit value
+     * Holds the value of the converted unit of measurement
      * 
      * @var float 
      */
-    private static $convertedFrom;
+    private static $converted;
 
     /**
      * Processes the conversions
@@ -47,9 +47,9 @@ class Area {
      * @return float
      */
     public function processConversion(float $value, string $from_unit, string $to_unit) {
-        self::$convertedTo = self::convertToUnit($value, $from_unit, $to_unit);
-        self::$convertedFrom = self::convertFromUnit(self::$convertedTo, $to_unit, $from_unit);
-        return self::$convertedFrom;
+        self::$convertTo = self::convertToUnit($value, $from_unit, $to_unit);
+        self::$converted = self::convertFromUnit(self::$convertTo, $to_unit, $from_unit);
+        return self::$converted;
     }
 
     /**
