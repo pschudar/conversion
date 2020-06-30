@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace conversion;
 
+/**
+ * Mass
+ * 
+ * @category mass
+ * @package conversion
+ * @author Paul Schudar
+ * @copyright Copyright (c) 2020, Paul Schudar
+ * @license https://opensource.org/licenses/mit-license.php MIT License
+ * @internal Common Unit: Kilograms
+ */
 class Mass {
 
     use \calc\Calculate;
@@ -20,13 +30,8 @@ class Mass {
         'metric_tons' => 1000
     ];
 
-    private $value;
-    private $processedValue;
-
     /**
-     * Processes the mass and weight conversions
-     * 
-     * @internal Common Unit: Kilograms
+     * Processes the conversion
      * 
      * @param string $value
      * @param string $from_unit
@@ -34,9 +39,7 @@ class Mass {
      * @return float
      */
     public function processConversion(float $value, string $from_unit, string $to_unit) {
-        $this->value = self::convertToUnit($value, $from_unit, $to_unit);
-        $this->processedValue = self::convertFromUnit($this->value, $to_unit, $from_unit);
-        return $this->processedValue;
+        return self::processConversions($value, $from_unit, $to_unit);
     }
 
 }

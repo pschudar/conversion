@@ -1,8 +1,52 @@
 <?php
 
+declare(strict_types=1);
+
 namespace calc;
 
+/**
+ * Calculates and returns the requested value back to the calling class.
+ * 
+ * Each class uses a 'common unit' to convert units of measurement to. Each 
+ * class also holds an array of formulas to convert each unit to the common unit.
+ * The Calculate trait, common to all but two classes, processes the conversions.
+ * 
+ * @category calculate
+ * @package conversion
+ * @author Paul Schudar
+ * @copyright Copyright (c) 2020, Paul Schudar
+ * @license https://opensource.org/licenses/mit-license.php MIT License
+ * @internal Unused by Area and Temperature
+ */
 trait Calculate {
+
+    /**
+     * Holds the value of the unit of measurement in the common unit
+     * 
+     * @var float 
+     */
+    private static $convertTo;
+
+    /**
+     * Holds the value of the converted unit of measurement
+     * 
+     * @var float 
+     */
+    private static $converted;
+
+    /**
+     * Processes the unit of measurement conversions
+     * 
+     * @param string $value
+     * @param string $from_unit
+     * @param string $to_unit
+     * @return float
+     */
+    public static function processConversions(float $value, string $from_unit, string $to_unit) {
+        self::$convertTo = self::convertToUnit($value, $from_unit, $to_unit);
+        self::$converted = self::convertFromUnit(self::$convertTo, $to_unit, $from_unit);
+        return self::$converted;
+    }
 
     /**
      * Crunches the numbers and returns the value requested
@@ -31,6 +75,7 @@ trait Calculate {
 
     /**
      * Determines whether to multiply or divide for the conversion
+     * 
      * @param float $value
      * @param string $unit
      * @param array $const

@@ -4,17 +4,42 @@ declare(strict_types=1);
 
 namespace conversion;
 
+/**
+ * Temperature
+ * 
+ * Results are calculated differently for Temperature and as such, the class does not
+ * utilize the \calc\Calculate trait. Instead, it contains its own methods for
+ * the conversion.
+ * 
+ * @category temperature
+ * @package conversion
+ * @author Paul Schudar
+ * @copyright Copyright (c) 2020, Paul Schudar
+ * @license https://opensource.org/licenses/mit-license.php MIT License
+ * @internal Common Unit: Celsius
+ */
 class Temperature {
 
     const CONVERSION_ARRAY = [
-        'celsius' => 'x',
-        'fahrenheit' => 'x',
-        'kelvin' => 'x',
-        'rankine' => 'x'
+        'celsius' => 'not_applicable',
+        'fahrenheit' => 'not_applicable',
+        'kelvin' => 'not_applicable',
+        'rankine' => 'not_applicable'
     ];
 
-    private $value;
-    private $processedValue;
+    /**
+     * Holds the value of the unit of measurement in the common unit
+     * 
+     * @var float 
+     */
+    private static $convertTo;
+
+    /**
+     * Holds the value of the converted unit of measurement
+     * 
+     * @var float 
+     */
+    private static $converted;
 
     /**
      * Processes the temperature conversions
@@ -25,19 +50,20 @@ class Temperature {
      * @return float
      */
     public function processConversion(float $value, string $from_unit, string $to_unit) {
-        $this->value = self::convertToCelsius($value, $from_unit, $to_unit);
-        $this->processedValue = self::convertFromCelsius($this->value, $to_unit, $from_unit);
-        return $this->processedValue;
+        self::$convertTo = self::convertToUnit($value, $from_unit, $to_unit);
+        self::$converted = self::convertFromUnit(self::$convertTo, $to_unit, $from_unit);
+        return self::$converted;
     }
 
     /**
-     * Converts other temperature formats to celsius / centigrade
+     * Converts other temperature formats to Celsius / centigrade
      * 
      * @param float $value
      * @param string $from_unit
-     * @return float|string
+     * @return float
+     * @throws \utility\ConversionError
      */
-    private static function convertToCelsius(float $value, string $from_unit) {
+    private static function convertToUnit(float $value, string $from_unit) {
         if (is_float($value)) {
             switch ($from_unit) :
                 case 'celsius':
@@ -51,18 +77,18 @@ class Temperature {
                 default:
                     throw new \utility\ConversionError(UNSUPPORTED . ': ' . $from_unit);
             endswitch;
-        } throw new \conversion\ConversionError('Enter a valid value');
+        } throw new \utility\ConversionError(INVALID);
     }
 
     /**
-     * Converts celsius / centigrade to other formats
+     * Converts Celsius / centigrade to other formats
      * 
      * @param float $value
      * @param string $to_unit
      * @return float|string
      * @throws \utility\ConversionError
      */
-    private static function convertFromCelsius(float $value, string $to_unit) {
+    private static function convertFromUnit(float $value, string $to_unit) {
         if (is_float($value)) {
             switch ($to_unit) :
                 case 'celsius':
@@ -76,7 +102,7 @@ class Temperature {
                 default:
                     throw new \utility\ConversionError(UNSUPPORTED . ': ' . $to_unit);
             endswitch;
-        } throw new \utility\ConversionError('Enter a valid value');
+        } throw new \utility\ConversionError(INVALID);
     }
 
 }

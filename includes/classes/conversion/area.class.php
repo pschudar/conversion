@@ -5,24 +5,41 @@ declare(strict_types=1);
 namespace conversion;
 
 /**
- * Area Class
+ * Area
  * 
- * Utilizes \conversion\Length::CONVERSION_ARRAY by stripping 'square_' from the 
- * array key. 
+ * Utilizes \conversion\Length::CONVERSION_ARRAY 
  * 
  * Results are calculated differently for Area and as such, the class does not
  * utilize the \calc\Calculate trait. Instead, it contains its own methods for
  * the conversion.
+ * 
+ * @category area
+ * @package conversion
+ * @author Paul Schudar
+ * @copyright Copyright (c) 2020, Paul Schudar
+ * @license https://opensource.org/licenses/mit-license.php MIT License
+ * @internal Common Unit: Square meters
  */
 class Area {
 
-    private $value;
-    private $processedValue;
+    /**
+     * Holds the value of the unit of measurement in the common unit
+     * 
+     * @var float 
+     */
+    private static $convertTo;
 
     /**
-     * Processes the area conversions
+     * Holds the value of the converted unit of measurement
      * 
-     * @internal Common Unit: Square Meters
+     * @var float 
+     */
+    private static $converted;
+
+    /**
+     * Processes the conversions
+     * 
+     * @internal Common Unit: seconds
      * 
      * @param string $value
      * @param string $from_unit
@@ -30,13 +47,13 @@ class Area {
      * @return float
      */
     public function processConversion(float $value, string $from_unit, string $to_unit) {
-        $this->value = self::convertToSquareMeters($value, $from_unit, $to_unit);
-        $this->processedValue = self::convertFromSquareMeters($this->value, $to_unit, $from_unit);
-        return $this->processedValue;
+        self::$convertTo = self::convertToUnit($value, $from_unit, $to_unit);
+        self::$converted = self::convertFromUnit(self::$convertTo, $to_unit, $from_unit);
+        return self::$converted;
     }
 
     /**
-     * Compiles a list of array keys, adds 'square_' to the front of the key name.
+     * Compiles a list of array keys, prefixes 'square_' to the key name.
      * 
      * @return array
      */
@@ -67,14 +84,14 @@ class Area {
      * @param string $from_unit
      * @return float|string
      */
-    private static function convertToSquareMeters(float $value, string $from_unit) {
+    private static function convertToUnit(float $value, string $from_unit) {
         # removes 'square_' from the from_unit value & utilizes \conversion\Length::CONVERSION_ARRAY
-        $from_unit = str_replace('square_', '', $from_unit);
-        switch (array_key_exists($from_unit, \conversion\Length::CONVERSION_ARRAY)) :
+        $fromUnitValue = str_replace('square_', '', $from_unit);
+        switch (array_key_exists($fromUnitValue, \conversion\Length::CONVERSION_ARRAY)) :
             case false:
                 throw new \utility\ConversionError(UNSUPPORTED . ': ' . $from_unit);
             default:
-                return self::calculate($value, $from_unit, \conversion\Length::CONVERSION_ARRAY, 'multiply');
+                return self::calculate($value, $fromUnitValue, \conversion\Length::CONVERSION_ARRAY, 'multiply');
         endswitch;
     }
 
@@ -85,7 +102,7 @@ class Area {
      * @param string $to_unit
      * @return float|string
      */
-    private static function convertFromSquareMeters(float $value, string $to_unit) {
+    private static function convertFromUnit(float $value, string $to_unit) {
         $to_unit = str_replace('square_', '', $to_unit);
         switch (array_key_exists($to_unit, \conversion\Length::CONVERSION_ARRAY)) :
             case false:
