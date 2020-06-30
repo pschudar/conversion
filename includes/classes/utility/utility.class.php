@@ -22,7 +22,6 @@ class Utility {
      * 
      * Provides easy access to an otherwise lengthy function name.
      * 
-     * @internal : Utility
      * @param string $string
      * @return string
      */
@@ -33,7 +32,6 @@ class Utility {
     /**
      * Determines if the request was a post request
      * 
-     * @internal : Utility
      * @return bool
      */
     public static function isPostRequest() {
@@ -43,7 +41,6 @@ class Utility {
     /**
      * Determines if the request was an ajax request
      * 
-     * @internal : Utility
      * @return Boolean
      */
     public static function isAjaxRequest() {
@@ -54,7 +51,6 @@ class Utility {
     /**
      * Processes a string by removing blank spaces and replacing them with underscores
      * 
-     * @internal : Utility
      * @param string $string
      * @return string
      */
@@ -81,7 +77,6 @@ class Utility {
      * Accepts $unit from foreach loop, $opt is the return value from the 
      * optionize function, from_to_unit is from_unit or to_unit
      * 
-     * @internal : Utility
      * @param string $unit
      * @param string $opt
      * @param string $from_to_unit
@@ -104,7 +99,6 @@ class Utility {
      * 
      * Rounds to $precision and trims extra trailing zeros
      * 
-     * @internal : Utility
      * @param string $float
      * @param int $precision
      * @return string
